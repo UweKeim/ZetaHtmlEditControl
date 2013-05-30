@@ -2,7 +2,7 @@
 
 This project presents you a small wrapper class around the Windows Forms 2.0 [`WebBrowser` control](http://msdn.microsoft.com/en-us/library/2te2y1x6.aspx) control.
 
-![Alt text](http://i3.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=zetahtmleditcontrol&DownloadId=93411&img=img.png)
+![Screenshot of Zeta Html Edit Control](http://i.imgur.com/KCNmd3f.png)
 
 ## Features
 
