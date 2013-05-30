@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control", "Control\Control.csproj", "{B00AE765-8212-43FD-8E70-768A6C20EE93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{3C3B613E-8DFA-4D36-9DE6-EC101F1A6AA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZetaPad", "ZetaPad\ZetaPad.csproj", "{AE66A7F6-3B16-437B-AE41-29AD5C53B7C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B00AE765-8212-43FD-8E70-768A6C20EE93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B00AE765-8212-43FD-8E70-768A6C20EE93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C3B613E-8DFA-4D36-9DE6-EC101F1A6AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C3B613E-8DFA-4D36-9DE6-EC101F1A6AA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE66A7F6-3B16-437B-AE41-29AD5C53B7C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE66A7F6-3B16-437B-AE41-29AD5C53B7C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
