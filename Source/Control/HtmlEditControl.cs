@@ -3998,6 +3998,14 @@ namespace ZetaHtmlEditControl
         {
             private readonly Dictionary<string, Size> _initialImgSizes = new Dictionary<string, Size>();
 
+            /// <summary>
+            /// Diese Funktion dient dazu, die Grid-Handles proportional zu skalieren, so dass
+            /// Benutzer das Bild zwar in der Größe ändern kann, jedoch das Seitenverhältnis immer
+            /// beibehalten bleibt.
+            /// </summary>
+            /// <remarks>
+            /// Stichwörter: bild, image, resize, size, größe, groesse, scale, "width", "height".
+            /// </remarks>
             void IHTMLEditHost.SnapRect(IHTMLElement pIElement, ref tagRECT prcNew, _ELEMENT_CORNER eHandle)
             {
                 var img = pIElement as IHTMLImgElement;

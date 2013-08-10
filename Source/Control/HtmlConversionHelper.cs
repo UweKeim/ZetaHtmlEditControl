@@ -178,17 +178,11 @@ namespace ZetaHtmlEditControl
             }
             else
             {
-                var folderUrlPath =
-                    PathHelper.ConvertFilePathToFileUrl(
-                    saveFolderPath).TrimEnd('/');
+                var folderUrlPath = PathHelper.ConvertFilePathToFileUrl(saveFolderPath).TrimEnd('/');
 
-                imagesFolderPathPlaceHolder =
-                    imagesFolderPathPlaceHolder.TrimEnd('/');
+                imagesFolderPathPlaceHolder = imagesFolderPathPlaceHolder.TrimEnd('/');
 
-                html =
-                    html.Replace(
-                        imagesFolderPathPlaceHolder,
-                        folderUrlPath);
+                html = html.Replace(imagesFolderPathPlaceHolder, folderUrlPath);
 
                 return html;
             }
@@ -197,9 +191,7 @@ namespace ZetaHtmlEditControl
         internal class ImageInfo
         {
             public string Source { get; set; }
-
             public int Width { get; set; }
-
             public int Height { get; set; }
         }
 
@@ -227,20 +219,17 @@ namespace ZetaHtmlEditControl
 
                             while (r.MoveToNextAttribute())
                             {
-                                if (r.Name.ToLowerInvariant() == @"src")
+                                switch (r.Name.ToLowerInvariant())
                                 {
-                                    //if (!al.Contains(r.Value))
-                                    //{
-                                    ii.Source = r.Value;
-                                    //}
-                                }
-                                else if (r.Name.ToLowerInvariant() == @"width")
-                                {
-                                    ii.Width = ConvertHelper.ToInt32(r.Value);
-                                }
-                                else if (r.Name.ToLowerInvariant() == @"height")
-                                {
-                                    ii.Height = ConvertHelper.ToInt32(r.Value);
+                                    case @"src":
+                                        ii.Source = r.Value;
+                                        break;
+                                    case @"width":
+                                        ii.Width = ConvertHelper.ToInt32(r.Value);
+                                        break;
+                                    case @"height":
+                                        ii.Height = ConvertHelper.ToInt32(r.Value);
+                                        break;
                                 }
                             }
 
