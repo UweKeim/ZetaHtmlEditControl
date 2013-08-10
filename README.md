@@ -35,8 +35,22 @@ To read out the HTML from the control, call the `ExtendedWebBrowser.GetDocumentT
 
 ## Other notes
 
+You need to have the `<NetFx40_LegacySecurityPolicy enabled="true" />` switch inside your application's configuration file in order to use the control within .NET 4. E.g. something like that:
+
+    <?xml version="1.0"?>
+    <configuration>
+      <startup>
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.0"/>
+      </startup>
+      <runtime>
+        <loadFromRemoteSources enabled="true" />
+        <NetFx40_LegacySecurityPolicy enabled="true" />
+      </runtime>
+    </configuration>
+
 A more [detailed article](http://www.codeproject.com/Articles/43954/ZetaplusHTMLplusEditplusControl) is available [over on The Code Project](http://www.codeproject.com/Articles/43954/ZetaplusHTMLplusEditplusControl).
 
 ## History
 
+  * *2013-08-10* - Added app.config switch for .NET 4.
   * *2013-05-30* - First public release to Github.
