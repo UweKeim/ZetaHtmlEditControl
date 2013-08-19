@@ -4,6 +4,8 @@ This project presents you a small wrapper class around the Windows Forms 2.0 [`W
 
 ![Screenshot of Zeta Html Edit Control](http://i.imgur.com/5medndw.png)
 
+We do use this project inside several "real world" projects in our company, e.g. a [Test Management tool](http://www.zeta-test.com) and a Windows-based [Content Management System (CMS)](http://www.zeta-producer.com/de/cms.html).
+
 ## Features
 
 The wrapper is no rocket science but provides some features I struggled with in the past. We use the control in several of our own (internal) applications.
