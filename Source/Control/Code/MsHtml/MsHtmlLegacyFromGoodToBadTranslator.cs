@@ -44,6 +44,11 @@
             {
                 foreach (var node in nodes)
                 {
+                    if (node.HasInlineCssWithName(@"background-color"))
+                    {
+                        node.Name = @"font";
+                    }
+
                     if (node.HasInlineCssWithName(@"color"))
                     {
                         node.Name = @"font";

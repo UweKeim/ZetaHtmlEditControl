@@ -26,7 +26,7 @@ namespace Test
 
             const string s3 = @"<p>ZetaHtmlEditControl.Code.HttpServer<br />
 {<br />
-<span style=""background-color: rgb(0, 255, 0);"">using System.Globalization;<br />
+<span style=""background-color: #00FF00"">using System.Globalization;<br />
 using System.Diagnostics;<br />
 using System.Configuration;<br />
 using System.Collections.Generic;<br />
