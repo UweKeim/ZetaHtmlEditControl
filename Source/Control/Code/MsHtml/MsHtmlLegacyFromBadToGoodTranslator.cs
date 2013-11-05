@@ -29,7 +29,6 @@
          */
 
         public const string NoBackgroundColor = @"window";
-        //public const string NoBackgroundColor = @"transparent";
         public const string NoForegroundColor = @"windowtext";
 
         public static string Translate(string html)
@@ -41,6 +40,8 @@
         {
             var doc = new HtmlDocument();
             doc.LoadHtml(html);
+
+            // --
 
             var nodes = doc.DocumentNode.SelectNodes(@"//font");
             if (nodes != null)
@@ -89,6 +90,63 @@
                     node.RemoveAttributeWithNameIfEmpty(@"style");
                 }
             }
+
+            // --
+
+            nodes =
+                doc.DocumentNode.SelectNodes(
+                    @"//*[@align='left' or @align='center' or @align='right' or @align='justify']");
+            if (nodes != null)
+            {
+                foreach (var node in nodes)
+                {
+                    if (node.HasAttributeWithName(@"align"))
+                    {
+                        var align = node.ReadAttributeValue(@"align");
+                        if (!string.IsNullOrEmpty(align))
+                        {
+                            node.SetInlineCss(@"text-align", align);
+                        }
+                        node.RemoveAttributeWithName(@"align");
+                    }
+
+                    node.RemoveAttributeWithNameIfEmpty(@"style");
+                }
+            }
+
+            // --
+            // "Müll" entfernen.
+
+            nodes = doc.DocumentNode.SelectNodes(@"//*[self::blockquote or self::p]");
+            if (nodes != null)
+            {
+                foreach (var node in nodes)
+                {
+                    if (node.HasAttributeWithName(@"style"))
+                    {
+                        var align = node.ReadInlineCssValue(@"margin-right");
+                        if (!string.IsNullOrEmpty(align) &&
+                            string.Equals(align, @"0px", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            node.RemoveInlineCssItem(@"margin-right");
+                        }
+                    }
+
+                    if (node.HasAttributeWithName(@"dir"))
+                    {
+                        var align = node.ReadAttributeValue(@"dir");
+                        if (!string.IsNullOrEmpty(align) &&
+                            string.Equals(align, @"ltr", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            node.RemoveAttributeWithName(@"dir");
+                        }
+                    }
+
+                    node.RemoveAttributeWithNameIfEmpty(@"style");
+                }
+            }
+
+            // --
 
             removeEmptySpanTags(doc);
 

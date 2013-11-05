@@ -37,27 +37,30 @@
             var doc = new HtmlDocument();
             doc.LoadHtml(html);
 
+            // --
+
             var nodes = doc.DocumentNode.SelectNodes(@"//span");
             if (nodes != null)
             {
                 foreach (var node in nodes)
                 {
-                    node.Name = @"font";
-
                     if (node.HasInlineCssWithName(@"color"))
                     {
+                        node.Name = @"font";
                         node.SetAttributeValue(@"color", node.ReadInlineCssValue(@"color"));
                         node.RemoveInlineCssItem(@"color");
                     }
 
                     if (node.HasInlineCssWithName(@"font-family"))
                     {
+                        node.Name = @"font";
                         node.SetAttributeValue(@"face", node.ReadInlineCssValue(@"font-family"));
                         node.RemoveInlineCssItem(@"font-family");
                     }
 
                     if (node.HasInlineCssWithName(@"font-size"))
                     {
+                        node.Name = @"font";
                         node.SetAttributeValue(@"size", translateFontSizeFromCss(node.ReadInlineCssValue(@"font-size")));
                         node.RemoveInlineCssItem(@"font-size");
                     }
@@ -65,6 +68,25 @@
                     node.RemoveAttributeWithNameIfEmpty(@"style");
                 }
             }
+
+            // --
+
+            nodes = doc.DocumentNode.SelectNodes(@"//*");
+            if (nodes != null)
+            {
+                foreach (var node in nodes)
+                {
+                    if (node.HasInlineCssWithName(@"text-align"))
+                    {
+                        node.SetAttributeValue(@"align", node.ReadInlineCssValue(@"text-align"));
+                        node.RemoveInlineCssItem(@"text-align");
+                    }
+
+                    node.RemoveAttributeWithNameIfEmpty(@"style");
+                }
+            }
+
+            // --
 
             return doc.DocumentNode.OuterHtml;
         }
