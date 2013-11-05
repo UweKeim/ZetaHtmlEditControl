@@ -1,6 +1,8 @@
 namespace Test
 {
-	partial class MainForm
+    using ZetaHtmlEditControl.UI;
+
+    partial class MainForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -59,7 +61,7 @@ namespace Test
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.htmlEditUserControl1 = new ZetaHtmlEditControl.HtmlEditUserControl();
+            this.htmlEditUserControl1 = new HtmlEditUserControl();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -346,7 +348,7 @@ namespace Test
 
 		#endregion
 
-        private ZetaHtmlEditControl.HtmlEditUserControl htmlEditUserControl1;
+        private HtmlEditUserControl htmlEditUserControl1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;

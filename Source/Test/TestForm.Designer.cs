@@ -1,6 +1,9 @@
 namespace Test
 {
-	partial class TestForm
+    using ZetaHtmlEditControl.UI;
+    using ZetaHtmlEditControl.UI.EditControlDerives;
+
+    partial class TestForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -33,14 +36,14 @@ namespace Test
             this.button2 = new System.Windows.Forms.Button();
             this.buttonGetHtml = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.htmlEditControl1 = new ZetaHtmlEditControl.HtmlEditControl();
+            this.htmlEditControl1 = new ZetaHtmlEditControl.UI.EditControlDerives.HtmlEditControl();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonLoad = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.ToolbarVisibleCheckBox = new System.Windows.Forms.CheckBox();
-            this.htmlEditUserControl1 = new ZetaHtmlEditControl.HtmlEditUserControl();
+            this.htmlEditUserControl1 = new ZetaHtmlEditControl.UI.HtmlEditUserControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button3 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -53,7 +56,7 @@ namespace Test
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(12, 243);
+            this.button1.Location = new System.Drawing.Point(12, 239);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(108, 26);
             this.button1.TabIndex = 2;
@@ -66,7 +69,7 @@ namespace Test
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(12, 211);
+            this.button2.Location = new System.Drawing.Point(12, 207);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(108, 26);
             this.button2.TabIndex = 1;
@@ -79,7 +82,7 @@ namespace Test
             // 
             this.buttonGetHtml.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonGetHtml.Image = ((System.Drawing.Image)(resources.GetObject("buttonGetHtml.Image")));
-            this.buttonGetHtml.Location = new System.Drawing.Point(135, 211);
+            this.buttonGetHtml.Location = new System.Drawing.Point(135, 207);
             this.buttonGetHtml.Name = "buttonGetHtml";
             this.buttonGetHtml.Size = new System.Drawing.Size(98, 26);
             this.buttonGetHtml.TabIndex = 3;
@@ -98,18 +101,17 @@ namespace Test
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(1);
-            this.panel1.Size = new System.Drawing.Size(453, 193);
+            this.panel1.Size = new System.Drawing.Size(453, 189);
             this.panel1.TabIndex = 1;
             // 
             // htmlEditControl1
             // 
             this.htmlEditControl1.AllowWebBrowserDrop = false;
-            this.htmlEditControl1.CssFontSize = "13px";
             this.htmlEditControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.htmlEditControl1.IsWebBrowserContextMenuEnabled = false;
             this.htmlEditControl1.Location = new System.Drawing.Point(1, 1);
             this.htmlEditControl1.Name = "htmlEditControl1";
-            this.htmlEditControl1.Size = new System.Drawing.Size(451, 191);
+            this.htmlEditControl1.Size = new System.Drawing.Size(451, 187);
             this.htmlEditControl1.TabIndex = 0;
             // 
             // label1
@@ -126,7 +128,7 @@ namespace Test
             // 
             this.buttonLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonLoad.Image = ((System.Drawing.Image)(resources.GetObject("buttonLoad.Image")));
-            this.buttonLoad.Location = new System.Drawing.Point(248, 211);
+            this.buttonLoad.Location = new System.Drawing.Point(248, 207);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(98, 26);
             this.buttonLoad.TabIndex = 4;
@@ -139,7 +141,7 @@ namespace Test
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonSave.Image")));
-            this.buttonSave.Location = new System.Drawing.Point(248, 243);
+            this.buttonSave.Location = new System.Drawing.Point(248, 239);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(98, 26);
             this.buttonSave.TabIndex = 5;
@@ -179,7 +181,7 @@ namespace Test
             this.ToolbarVisibleCheckBox.AutoSize = true;
             this.ToolbarVisibleCheckBox.Checked = true;
             this.ToolbarVisibleCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ToolbarVisibleCheckBox.Location = new System.Drawing.Point(12, 436);
+            this.ToolbarVisibleCheckBox.Location = new System.Drawing.Point(12, 432);
             this.ToolbarVisibleCheckBox.Name = "ToolbarVisibleCheckBox";
             this.ToolbarVisibleCheckBox.Size = new System.Drawing.Size(113, 21);
             this.ToolbarVisibleCheckBox.TabIndex = 1;
@@ -192,11 +194,10 @@ namespace Test
             this.htmlEditUserControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.htmlEditUserControl1.IE10RenderingMode = true;
             this.htmlEditUserControl1.IsToolbarVisible = false;
             this.htmlEditUserControl1.Location = new System.Drawing.Point(12, 12);
             this.htmlEditUserControl1.Name = "htmlEditUserControl1";
-            this.htmlEditUserControl1.Size = new System.Drawing.Size(663, 422);
+            this.htmlEditUserControl1.Size = new System.Drawing.Size(663, 418);
             this.htmlEditUserControl1.TabIndex = 0;
             // 
             // tabPage2
@@ -253,7 +254,7 @@ namespace Test
 
 		#endregion
 
-		private ZetaHtmlEditControl.HtmlEditControl htmlEditControl1;
+		private HtmlEditControl htmlEditControl1;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button buttonGetHtml;
@@ -264,7 +265,7 @@ namespace Test
 		private System.Windows.Forms.TabControl tabControl1;
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.TabPage tabPage2;
-		private ZetaHtmlEditControl.HtmlEditUserControl htmlEditUserControl1;
+		private HtmlEditUserControl htmlEditUserControl1;
 		private System.Windows.Forms.CheckBox ToolbarVisibleCheckBox;
 		private System.Windows.Forms.Button button3;
 	}

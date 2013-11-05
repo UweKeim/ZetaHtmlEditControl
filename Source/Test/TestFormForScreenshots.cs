@@ -4,11 +4,13 @@ namespace Test
     using System.Globalization;
     using System.Threading;
     using System.Windows.Forms;
-    using ZetaHtmlEditControl;
+    using ZetaHtmlEditControl.Code.Configuration;
 
     public partial class TestFormForScreenshots :
         Form
     {
+        private bool _ignore;
+
         public TestFormForScreenshots()
         {
             InitializeComponent();
@@ -17,29 +19,29 @@ namespace Test
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(@"en-US");
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            const string s = @"<P><b>Some tests</b></P><p>Random content. <font color=green>Please edit</font>.</p><p>Use right-click for options.</p>";
-            //htmlEditControl1.DocumentText = s;
-            updateUI();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            const string s = @"<P><b>Some tests</b></P><p>Random content. <font color=red>Also editable</font>.</p>";
-            //htmlEditControl1.DocumentText = s;
-            updateUI();
-        }
-
         private void TestForm_Shown(object sender, EventArgs e)
         {
-            const string s = @"<P>Click the buttons below to set different texts. German Umlaute: Ä Ö Ü ä ö ü ß.</p>";
-            //htmlEditControl1.SetDocumentText(s, @"C:\", true);
+            htmlEditUserControl1.Configure(new HtmlEditControlConfiguration{AllowFontChange = false});
+            htmlEditUserControl1.IsToolbarVisible = true;
 
-            const string s2 = @"<P></p>";
-            htmlEditUserControl1.HtmlEditControl.SetDocumentText(s2, @"C:\", true);
-
-            const string s3 = @"<P><b>Some tests</b></P><p>Random content. <font color=green>Please edit</font>.</p><p>Use right-click for options.</p>";
+            const string s3 = @"<p>ZetaHtmlEditControl.Code.HttpServer<br />
+{<br />
+<span style=""background-color: rgb(0, 255, 0);"">using System.Globalization;<br />
+using System.Diagnostics;<br />
+using System.Configuration;<br />
+using System.Collections.Generic;<br />
+using System;<br />
+</span>using System.Net;<br />
+using System.Net.NetworkInformation;<br />
+using System.Net.Sockets;<br />
+using System.Text;<br />
+using global::HttpServer;<br />
+using global::HttpServer.HttpModules;<br />
+using global::HttpServer.Sessions;<br />
+using Helper;<br />
+using Properties;</p>
+";
+            //const string s3 = @"<P><b>Some tests</b></P><p>Random content. <font color=green>Please edit</font>.</p><p>Use right-click for options.</p>";
             htmlEditUserControl1.HtmlEditControl.DocumentText = s3;
             updateUI();
 
@@ -53,32 +55,27 @@ namespace Test
 
         private void ToolbarVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            htmlEditUserControl1.IsToolbarVisible = ToolbarVisibleCheckBox.Checked;
+            if (!_ignore)
+            {
+                _ignore = true;
+                htmlEditUserControl1.IsToolbarVisible = ToolbarVisibleCheckBox.Checked;
+                _ignore = false;
+            }
         }
 
         private void TestForm_Load(object sender, EventArgs e)
         {
-            //			WebBrowserHelper.SafeSwitchToHighestInternetExplorerVersionAsync();
-
-            const string html =
-                @"<P>Mit Bild:</P>
-				<P><IMG 
-				src=""http://pseudo-image-folder-path/d0906191-5a75-4568-97d4-924ee727426d""></P>
-				<P>Yes!</P>";
-
-            var images = HtmlEditControl.GetContainedImageFileNames(html);
-            foreach (var image in images)
-            {
-                Console.WriteLine(image);
-            }
-
             htmlEditUserControl1.HtmlEditControl.WantCloseDialogWithOK += delegate { MessageBox.Show("Close."); };
-        }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            htmlEditUserControl1.HtmlEditControl.DocumentText = "lalala";
-            MessageBox.Show(htmlEditUserControl1.HtmlEditControl.DocumentText);
+            htmlEditUserControl1.IsToolbarVisible = true;
+            ToolbarVisibleCheckBox.Checked = htmlEditUserControl1.IsToolbarVisible;
+
+            htmlEditUserControl1.HtmlEditControl.UINeedsUpdate +=
+                delegate
+                {
+                    var el = htmlEditUserControl1.HtmlEditControl.GetElementAtCaret();
+                    infoTextBox.Text = el == null ? @"-" : el.tagName;
+                };
         }
     }
 }

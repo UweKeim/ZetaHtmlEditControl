@@ -1,26 +1,27 @@
-using System;
-using System.Runtime.InteropServices;
-using ZetaNative = ZetaHtmlEditControl.PInvoke.NativeMethods;
+using ZetaNative = ZetaHtmlEditControl.Code.PInvoke.NativeMethods;
 
 namespace Test
 {
+    using System;
+    using System.Runtime.InteropServices;
+
     class WinHook
     {
         static Native.HookProc MouseHookProcedure;
         static int hHook;
         public static Action OnDoubleCick;
 
+        static int lastDblClickTimestamp;
+
         public static void Init()
         {
-            MouseHookProcedure = new Native.HookProc(MouseHookProc);
+            MouseHookProcedure = MouseHookProc;
             hHook = Native.SetWindowsHookEx(Native.WH_GETMESSAGE, MouseHookProcedure, IntPtr.Zero, AppDomain.GetCurrentThreadId());
             if (hHook == 0)
             {
                 //if we failed, then nothing we can do about it
             }
         }
-
-        static int lastDblClickTimestamp = 0;
 
         public static int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
@@ -50,14 +51,13 @@ namespace Test
     {
         public delegate int HookProc(int nCode, IntPtr wParam, IntPtr lParam);
 
-        static int hHook = 0;
-
         //For other hook types, you can obtain these values from Winuser.h in the Microsoft SDK.
         public const int WH_MOUSE = 7;
 
         public const int WH_MOUSE_LL = 14;
         public const int WH_GETMESSAGE = 3;
         public const int WM_LBUTTONDBLCLK = 0x203;
+        static int hHook = 0;
 
         //Use this function to install a thread-specific hook.
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]

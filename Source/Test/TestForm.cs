@@ -1,13 +1,11 @@
 namespace Test
 {
-	using System;
-	using System.Globalization;
-	using System.IO;
-	using System.Threading;
-	using System.Windows.Forms;
-	using ZetaHtmlEditControl;
+    using System;
+    using System.IO;
+    using System.Windows.Forms;
+    using ZetaHtmlEditControl.Code.Html;
 
-	public partial class TestForm :
+    public partial class TestForm :
 		Form
 	{
 		public TestForm()
@@ -119,7 +117,7 @@ namespace Test
 				src=""http://pseudo-image-folder-path/d0906191-5a75-4568-97d4-924ee727426d""></P>
 				<P>Yes!</P>";
 
-			var images = HtmlEditControl.GetContainedImageFileNames(html);
+			var images = HtmlConversionHelper.GetContainedImageFileNames(html);
 			foreach (var image in images)
 			{
 				Console.WriteLine(image);

@@ -3,10 +3,14 @@ namespace Test
     using System;
     using System.IO;
     using System.Windows.Forms;
-    using ZetaHtmlEditControl;
+    using ZetaHtmlEditControl.Code.Configuration;
+    using ZetaHtmlEditControl.UI.EditControlDerives;
 
     public partial class MainForm : Form
     {
+        string DocumentFile;
+        int DocumentTextHashCode;
+
         public MainForm()
         {
             InitializeComponent();
@@ -47,6 +51,29 @@ namespace Test
             DuplicateAsToolbarButton(0, saveToolStripMenuItem);
             DuplicateAsToolbarButton(0, openToolStripMenuItem);
             DuplicateAsToolbarButton(0, newToolStripMenuItem);
+        }
+
+        HtmlEditControl HtmlEditControl
+        {
+            get
+            {
+                return htmlEditUserControl1.HtmlEditControl;
+            }
+        }
+
+        string DocumentText
+        {
+            get
+            {
+                //return HtmlEditControl.CompleteDocumentText;
+                
+                string dir = @"C:\";
+                if (DocumentFile != null)
+                    dir = Path.GetDirectoryName(DocumentFile);
+
+                return HtmlEditControl.GetDocumentText(dir, true);
+                //return HtmlEditControl.DocumentText;
+            }
         }
 
         public void SelectWord()
@@ -126,10 +153,6 @@ namespace Test
             AddToHistory(file);
         }
 
-        int DocumentTextHashCode = 0;
-
-        string DocumentFile = null;
-
         void SaveFile(string file)
         {
             //File.WriteAllText(file, DocumentText);
@@ -137,29 +160,6 @@ namespace Test
             DocumentTextHashCode = DocumentText.GetHashCode();
             DocumentFile = file;
             Text = "ZetaPad - " + DocumentFile;
-        }
-
-        HtmlEditControl HtmlEditControl
-        {
-            get
-            {
-                return htmlEditUserControl1.HtmlEditControl;
-            }
-        }
-
-        string DocumentText
-        {
-            get
-            {
-                //return HtmlEditControl.CompleteDocumentText;
-                
-                string dir = @"C:\";
-                if (DocumentFile != null)
-                    dir = Path.GetDirectoryName(DocumentFile);
-
-                return HtmlEditControl.GetDocumentText(dir, true);
-                //return HtmlEditControl.DocumentText;
-            }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)

@@ -3,6 +3,7 @@ namespace Test
     using System;
     using System.Threading;
     using System.Windows.Forms;
+    using ZetaHtmlEditControl.Code.MsHtml;
 
     static class Program
     {
@@ -15,6 +16,8 @@ namespace Test
 
             try
             {
+                doTest();
+
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new TestFormForScreenshots());
@@ -45,6 +48,16 @@ namespace Test
         private static void applicationThreadException(object sender, ThreadExceptionEventArgs e)
         {
             doHandleException(e.Exception);
+        }
+
+        private static void doTest()
+        {
+            var s = @"<br /><span a=""b"">eins <span>zwei</span> drei <span>vier <br /></span></span>.";
+            var t = MsHtmlLegacyFromBadToGoodTranslator.RemoveEmptySpanTags(s);
+            var q = @"<br /><span a=""b"">eins zwei drei vier <br /></span>.";
+
+            var b = t == q;
+            Console.WriteLine(b);
         }
     }
 }

@@ -5,6 +5,7 @@
 .svn/
 Deploy/
 Etc/
+Source/packages/*/
 
 
 #################
