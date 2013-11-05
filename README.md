@@ -54,5 +54,6 @@ A more [detailed article](http://www.codeproject.com/Articles/43954/ZetaplusHTML
 
 ## History
 
+  * *2013-11-05* - Foreground and background colors with CSS.
   * *2013-08-10* - Added app.config switch for .NET 4.
   * *2013-05-30* - First public release to Github.
