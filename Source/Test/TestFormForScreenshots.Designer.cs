@@ -34,6 +34,7 @@ namespace Test
             this.ToolbarVisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.htmlEditUserControl1 = new ZetaHtmlEditControl.UI.HtmlEditUserControl();
             this.infoTextBox = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ToolbarVisibleCheckBox
@@ -72,10 +73,21 @@ namespace Test
             this.infoTextBox.TabIndex = 1;
             this.infoTextBox.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(278, 648);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // TestFormForScreenshots
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(654, 683);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.infoTextBox);
             this.Controls.Add(this.ToolbarVisibleCheckBox);
             this.Controls.Add(this.htmlEditUserControl1);
@@ -98,6 +110,7 @@ namespace Test
         private HtmlEditUserControl htmlEditUserControl1;
         private System.Windows.Forms.CheckBox ToolbarVisibleCheckBox;
         private System.Windows.Forms.TextBox infoTextBox;
+        private System.Windows.Forms.Button button1;
 	}
 }
 

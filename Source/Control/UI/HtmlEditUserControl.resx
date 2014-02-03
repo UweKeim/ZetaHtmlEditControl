@@ -127,18 +127,11 @@
   <data name="undoToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKZSURBVDhPrZJtSFNRGMePipkWajpJlyhURq0PKzPK6VQU
-        NCojSSzMmqYQbotYgg3xQ60ECwuX2Qua6NJtqNvFsFG+TCOLgkMDMS26ZHkdTvIltaWJ63QfPRlW0Jf+
-        8OM+9//y6V703yWp/iSMrxlVJtSM6uPuOTAAN3iQ0drfFVM1nJpYO2I73TbFXeqddmrZ76ScR8Pf4EEG
-        HVpfqb2VH1OT6+y9Fe9dpMQ2TzT42wrA07Iuklxr74UunS1pZ8WAMPYWa9O+WyDFPTPkLDM5e7COY6Ou
-        v8UA3OAVP50h1wbmSUwla4MNnSMkLu1TylpGOLV1gsgZx6z4Sh/ecbUvk8YIbvDy+aywc5xkGO0cbGiM
-        kOgCNpzrGnMqGDuRVvSzIs2r5fFPgSe98ZqVm+1EaXE4YUMjhCKKnuHC7nGS1zRE4Kb2H4Isx/iBKFtH
-        VvbCC6xY8XiUHG8cInCDF6bqyApVddxdLFCFqaxP0vSDUydN3BTc1EYoOP+hIb3hjfOAgSPikhdsiNxy
-        M0RhwQCtoGC5Zf/2iz3tKfVD/cnVrI3PymiEUECuWRlZhjmJ0UH2tYwRQR6DT1g/Lz4hF2SbIgW55tLo
-        2sEHe+rtrVs0L/WBucyvTxl4Si/0zzF1xbZOk83GCZLS9oXAvTbLgP1kjbs2nO9Si+4PayOMk+VbmybL
-        1+U0q/1kjD+dL8k7Q3fZ56gOSzvniKD5KxE/miPwHs7MJghNTkWQyXkG8MluknllNmyksyV5Hq7K8kyr
-        xonPXSSifWGRqG4XAW+1eT7e+zaXvkrdc8jrmC4RSYtC6GxZoW4Slc499Q7+HTdJgd5jU1IC2nYkCYVG
-        xyFv3918X8QTxOMBY5AvTwDPeh74Pf8FjNfwuCOE0A98lG5gW5wNZgAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD4SURBVDhP1ZHBSsNAEIZTW3ry3IfpxUtRJJuUHvI8y2yu
+        Yj0I3gRBWtgXmM0pLyTiRVsRXWc2YxJpJDnaD4bAzv7/ZPaP/h9a65ME3G1i8EOBe1vmbi6tfjJrxyS8
+        T4zz9N2lgLG0+jnT5YREjyzmyTHghbSGQaJtNZkK8EsZ93lQgE9UV5m2U5E10AVbG/SUMrgWWQOvQCYb
+        ufSq8uKcH7RdfBYMAF9E9pvwiIAPlQnuFBSX0gpkujyVAV6ODgkxGnfHO1Oc+3aMgwxqvB+FapHmuGDx
+        nyt0sdLFjP+Ek/mZTondSLsfNqB13oMY3DMZXXfGeKxE0TfkkrgTysaH1wAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="undoToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -153,15 +146,10 @@
   <data name="textModulesToolStripItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHCSURBVDhPhdG/S0JRFAfwA46hf0A0BDrmEEJT2RAlRIEN
-        hUNTg1ZIZGQkJG9sa4mGhhrNQQqhdAgTCYtIiiCCNIWkRBND8UeG5umex33yhGcd+HLg3nMuH96DbjXn
-        dk/PCoLVIgi9Sp3u+ahymd3uRWQ1YrPZlDrd81HlMrtcSz9s8KfVwiaLvNM53fNRZe6My+X5KJUweHOD
-        109PWG802mmwR6aczmW+3p17HIlQQ08ohC+ZDFa+v8XUm02ccDjsfP1/7lE4jG/FIhZrNTEVphiz21f4
-        OgBxiCVnyrmHgQDeJxLtlJhi1Gpd5esAxCHWeSyGsWQSLx8fO7gHwSAmcjkxGSb5rNdxeGFhja8DEIdY
-        8Xy+HTl3x+vF+1QKb+NxfC0UMP/1hUPz8+t8HYA4xDqNRjHKvjh1KXS+7/djkj0qJVut4qDFssHXAYhD
-        rId0uiMSd9fnw/dKBZ+zWbFTBszmTb4OQBxi+djvooTu7vDs6qrN3Ts5QY3BsJUul8WeY6o+o1Hg6wDE
-        IZacKefqTKYLlVo9qdbrt1UazTj1Hq2WPqJWfIA4Ek1iduUqFXGIJWd25SpUf49O55Dz/uR2FMAvfU4x
-        KdM7QNMAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVDhP7ZDdDYQgEISpwBpM7Mhi7hUS+tQiLMCbwQFZ
+        /5Iz55tfMmFZlhmCe4QQwnyiyXv/0dg5GOpVFtBraIJ1gILaC5uUWiaRvRhjJ5P1JTxQWcBASoTGnKh9
+        MU+DhA2VBvZxucVKk5KYzbW9Nqi0JgJzx2wO2CWCnwzIa7DM4DN7rlk6uvcCQ+16JY3/E+e+QYS/X4w6
+        1JIAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="textModulesToolStripItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -179,10 +167,9 @@
   <data name="boldToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACdSURBVDhPYxgFGECbkZFxDQ48HSgvBlGGHzgBFa8HYSBb
-        ByLEEAHlR0C4+IEeUPEWEAaxIUIMUVB+FISLH+gDFe/EhkFyECX4gQFQ8X4QBrI9QHwgjoeKLQeyuYAY
-        LzACKjwKwiA2RAirGE7gB1R4BoSBbBOIEIqYCkQIE3ACsTMQP8SDG4BYEoj5gRgDgAwQBWIpAhinAUMS
-        MDAAAOHMJG+upDtyAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACASURBVDhPYxhcoL6+/k9DQ8N/EA0VIg2ANMMwVIg0MLgM
+        gGFgePwD4jtAXATETFCl2AE2A5Ax0IAZUKXYAbJiEH/VqlXMjY2NvkD+V5g40BAjsGJsAKYIhKFCYADU
+        NA1JrhQqjAmQFFHHAIq8gA0TDESgAnBSRtNEfDQOAGBgAAB9Z71dHIAeXQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="boldToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -197,9 +184,10 @@
   <data name="italicToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABySURBVDhPYxgFeIE2IyPjGmQMEoNIEQ90gBrXA3EPlE8y
-        0ANq3gKkdSFc0kEa0IANUDbpAKh5K5DKhPBIB0ZAA44CaUMIl0QA1LwEiM8AmSYQEeKBLRA/RMPuQCwO
-        xOxATBBwA7EkEEuhYaINGFKAgQEAZQ4PcVEkGa8AAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACVSURBVDhPYxgBoKmpybChoeE3ED+FCpEG6uvrFwA1/wfi
+        bKgQHQHQ9gggbgB6Qx0qRDwAapQC4h9Ap38G0kJQYeIBUGM31O+9UCHiQXt7uyDQ1k9AzT9bWlqkocLE
+        A6DmGpDtQHoOVIh4ANTEBcSvgAb8BdJqUGHiAVBjLsh2IF4NFSINAG29A9T8G0gbQYUGNWBgAADXQEUx
+        kL11KQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="italicToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -214,10 +202,9 @@
   <data name="underlineToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACSSURBVDhPYxh+IIyRkXENDAP52iCMRQwvcAIqXAeiIVww
-        0MEihhPoAhVvAtEQLgRgE8MF9ICKt4JoCBcCsInhAvpAxbtANIQLAdjEcAEDoOJ9IBrChQBsYriAMlDx
-        YSAdAuGCgSFUTBnCJQxSgRpOIGOQGESKxoAfiJ8QwAJAjBOADBADYikcWByI8RpAb8DAAAAKSx2+Slag
-        MAAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABpSURBVDhP7ZBBCsAgDATzCv/QVybkQ+LPevBYaLOweFBC
+        T6VQOrCIY1ZB+XkAVT0QbgeZXzCzE+F2kPmFD1wQH9UxGGuhgit0nSonBhtfqyiyXOkax3LcfYvSzsII
+        HM44tjIX7sLa64hcG2h/5wqUaBAAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="underlineToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -254,10 +241,9 @@
   <data name="bullettedListToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC1SURBVDhP1ZA7CsJAFEUnO4itCws2FlYhlYVF1uBe4h8V
-        MaLiBxHtbARLcRvx3JnB2oAgOXC4vMvMgxnzK6IgCDKlG0vC5X6apoXSV+oy7KnDAY5wjBOcYtcftTQo
-        hko3VpEmT1go3VgSLudJ0tYn5r5SN8O5FuMSV7jGLe7w4I9aWhQbpRurSMwTLko3luceRXGhdKMJWbjH
-        I57wjFf6Gz7wifrwGlo6+PIpQqx/4WfBvzDmDcWsKcWHxaHrAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABNSURBVDhPYxg8wKdpR4BP0/aXELwjACTW0NDwHxcGa0IG
+        II1+jTvNQRjEhgoTD7AZgM1mGAZrQgbYvEAxwGvj4AOj0YgdEGXzAAMGBgCAYZ1l2d5K/gAAAABJRU5E
+        rkJggg==
 </value>
   </data>
   <data name="bullettedListToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -272,11 +258,9 @@
   <data name="numberedListToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADPSURBVDhPvdI9CsJAEIbhzQ2ilXgLwRN4A2/gHTyBjaCd
-        lR7AMtGoxB9UNPiDCnaWloLX8N3MELCSBMkHD7MzZGebmL/EcZwWPI4FmWQIC0aUonRx78G3c4wxwRQz
-        hOjopxIGASVZkCpcbsNub+so5/ByF0tbdZQpNRYM9WyXzrHACmtssUOEA076aZwGgwG1JG3KcLmnmyPa
-        ikzzDC/3EeCqo9SpcjmklqU1Lv0RZ1xww535A0+8sMHXr1/HXo7GhV32S7LAxxvNuMsvxnwALOAmQ2Bd
-        92gAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABySURBVDhPYxg8wKdpR71v047/UC4YNDQ0/MeFoUpQAboB
+        JAOKXADSDMNQIRLB//+McAwFeG0cfMC3cccUIP7h07hjAlSI5EBs9qrfaQCkP0KFSAO+9dv0fJq23wbi
+        UqgQaS4AOv0TZdGIBRBl8wADBgYA3jeLce+ZmaQAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="numberedListToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -291,11 +275,10 @@
   <data name="indentToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADxSURBVDhPY4ABRkbGRiBeA8RroXgdEK8H4g1AvBGINwHx
-        FiDeCsSdUG1UBEBT8doKVUYnEN/84kBy6+v/uDBIHqoUO/AvvPb/0PkfODFIHqoUAcwi9vzX9t/sAGJb
-        Ru8/AOLjwiB5sCZkoOq64oGq+xpMk4kFKm4b/ys7rwa7QNVt8wEQHx2DxMGKCQH9wBNY/Q4ShyrBD6zi
-        7h+wjX/0Hx2DxKFKaACAqe0AEB8E4sNAfASIjwHxcSA+CcSngfgMEF8EKr0OxHfBmqgJ+IGmzwNiXLau
-        BWIpKJYEYiEgZgNiOOAHYgkghinCh5EMYGAAABl9qm6t87J5AAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACKSURBVDhPYxg8oKGh4T8pGKoNAbApwoeh2qgMfBq3v/Ft
+        3PHOr3mnHVQIp8ug0hDgV79Ny7t+p45v0/Yw36Yd/32atn9GNoQgAGlCxz6NO56B5LDZDsJgjTAAtFkb
+        2QVA/NW3eacTVJp4ADTgLTAcPiBrxmszVQG6TYQwVBsCYFOED0O1DX3AwAAAvULUL5zmZPYAAAAASUVO
+        RK5CYII=
 </value>
   </data>
   <data name="indentToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -310,11 +293,10 @@
   <data name="outdentToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADwSURBVDhPY4ABRkbGRiBeA8RroXgdEK8H4g1AvBGINwHx
-        FiDeCsSdUG1UBEBT8doKVUYnEN/84kBy6+v/uDBIHqoUO/AvvPb/0PkfODFIHqoUAbT9NzuYRewBS1hG
-        7z8AYuPCIHmwJmSg6r7mv6rrigdQLulA2Xm1g4rbRrALVN02HwCx0TFIHKyYENAPPIHV7yBxqBL8wCru
-        /gHb+Ef/0TFIHKqEBgCY2g4A8UEgPgzER4D4GBAfB+KTQHwaiM8A8UWg0utAfBesiZqAH2j6PCDGZeta
-        IJaCYkkgFgJiNiCGA34glgBimCJ8GMkABgYAE32qbjea1YcAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVDhPYxg8oKGh4T8pGKoNAbApwoeh2qgI/Jp32vk2
+        7njn07j9DVQIDLDZDsJQaQgAafZp2v7Zt2nHf9+m7WHe9Tt1/Oq3aUGlCQOfxh3PIJpRMUgOm+0gDNYI
+        A77NO52AGr5CNEJcAKS1odLEAZAhQP9/AGp8CxUCA7w2UxWg20QIQ7UhADZF+DBU29AHDAwAAqnUL0mE
+        qWMAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="outdentToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -332,10 +314,8 @@
   <data name="justifyLeftToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACSSURBVDhPzc29CoJQGMbxcxZXwcm822ZvwTvwIytJRSRC
-        RKKltsYupX/xKg0HpyP5wG96Px61nmitt4iRIMUOOfY4osAJFUI5sxi+flozGFtlbcFI6+GntUSNBi3O
-        uKBDL2cWw9fZVllbMKZW9BhwxQ0PVp94fY9sxuV7BFPrnXmGQGzgwcEUFz7GpTnGB/+KUm8yXy3nk8+k
-        cAAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABJSURBVDhPYxg8wLdpx38okzwAMqC+vr4BCP4Tg6HaEICu
+        LoBqQQU0dQFUCX5AtzCAKscEdHMBDEO1IQBdXABVih1Q7ALyAAMDANMMpwzwdHMzAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="justifyLeftToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -350,10 +330,9 @@
   <data name="justifyCenterToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACTSURBVDhPzc3NCgFRGAbgmazsrBR3a+0m7JHf/CRJkmTD
-        ztKleGY6MwuabJx469mcvvO+yf8kTdMOfQYMGTFmwow5C1Z0w7cI0V61umYTziJEe7Y6pVhdkq+yZcee
-        A8fwLUK0V65yCmcRor1ylTMXbk7vPPJP30yNBi0rvZfVq/didU2bJnXKlAVkB5+8FfwqSfIERUQuPHTN
-        +WoAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABYSURBVDhP1ZDRCQAgCERdsJ2kqdquEDoQydK+6kEgJ3QP
+        6W1KbX2Oe5i52yc5PvD2R8IGwqrBM5AsRMoA6BZrIHOKtAGaPAPkYVIGugVNKwPsQnx2gzuIBn1ziaUG
+        9DmIAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="justifyCenterToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -368,10 +347,8 @@
   <data name="justifyRightToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACeSURBVDhPzdLNCoJAFIbhmdYtA6GutnW30a7C0uiHiJAI
-        kVzozqU7N16E78SZQBpoM1IfPAvhnPMxoPqfaK3nWGGNDUJssUOMPQ44YSFrA8bResYFV9xkzGO4at4a
-        wbYe0WtFgjsesjZgXK1IkSGXMY/hqvOtsK1PlIxWqF9LPjPCGAFmBm1LaS34tq0NWpj/YIJ3Pg58MUXv
-        wK+iVAeRJy7aNn7XIwAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABHSURBVDhPYxiawLdpx38oEwEaGhr+E4Pr6+sbsBpACsBp
+        ADYb0TFtXYAOBsYF2GxFxrRzATbbsGH6xAI2m2GYvumAMGBgAACPZqcM3dFCGgAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="justifyRightToolStripButton.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -389,16 +366,10 @@
   <data name="insertTableToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAInSURBVDhPnZDdS5NhGMYfJIrRQR0ZSCeerGKhHlhz5Rhq
-        BIGDiBZ4sCKRWctVLIY6W0tq1VF/QpAndRB0WIHKUNacbtOpiIpOma6xJrOxb/dx9dwP7IXRovCBi/u+
-        X/hd/HjZLZtNq7PbDYcJsezmyEg/DvmIZdet1ntlflzxAl1zZXTOltDhKULjPoDalUP7dAaXptJocyZx
-        cTKBCxO/0Dq+D2KIZd0Wi7FYLouCN3GIAkesiJc/C6LAHs7AtpMSBdbtBIaC+6KAGGLZNbP5Qb5Ukgz6
-        /Gk4FmN4sRDFqD+C594wns3t4qknBKt7G8PftzDkCoIYYtlVk8mULRYlg1eLezjgN8W1siLtzkBA2sd9
-        PhBDLOsyGh+mCgXJgAo86+twr65iIRjE9PIyppaW4OXfJufnMeH3iwJiiGUag+FxIp+vMkjzm0IGlZ0M
-        KjsVEEMsa+/tNcdzuZoG/s1NyWB2ba3KgBhimVKvfxLLZqsMEvymkEFlJ4O7M4/Q8q0T3V9ugxhiWWtP
-        jyWaydQ08G5sSAYz/JZ/UqEvbhGTGGJZs043+COdrjKI85tCBjTvOAcg/9iGls8a6GIGyD8o0cT3k46z
-        HnZOq7XuplI1DaiADM6MKdERufFHjrytD7NTKtVolP/RUDL51+i/DqDp/WWR8yG1mM1jahwznfYxWWPj
-        /eMKxev/Sd3wiUjDlgI06SaW8Sfjqedp+Gf6j75jhrqAmIJhst/+Rbakhy71zAAAAABJRU5ErkJggg==
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACHSURBVDhPrY7tDYAgDETZ0nVInIQZXMB1HMFfyNNCGsW0
+        flzyTC29y4XPijGOhbWQH4JnJKD36GXZA6QM8ySjd87HR+Q0XQNYvuSnBvLvMmm1AA4sMKR5yCBm9s8a
+        6ADkDqg6B+wigOMevFfTHWaDnkljBmg1k1Y5TIRYcKsDZJ+Y3bo2CGEDwulbwooQAHYAAAAASUVORK5C
+        YII=
 </value>
   </data>
   <data name="insertTableToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -414,13 +385,13 @@
     <value>6, 25</value>
   </data>
   <data name="foreColorNoneToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColorNoneToolStripMenuItem.Text" xml:space="preserve">
     <value>None</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 6</value>
+    <value>149, 6</value>
   </data>
   <data name="foreColor01ToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -431,7 +402,7 @@
 </value>
   </data>
   <data name="foreColor01ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColor01ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 1</value>
@@ -445,7 +416,7 @@
 </value>
   </data>
   <data name="foreColor02ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColor02ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 2</value>
@@ -459,7 +430,7 @@
 </value>
   </data>
   <data name="foreColor03ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColor03ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 3</value>
@@ -473,7 +444,7 @@
 </value>
   </data>
   <data name="foreColor04ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColor04ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 4</value>
@@ -487,7 +458,7 @@
 </value>
   </data>
   <data name="foreColor05ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColor05ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 5</value>
@@ -501,7 +472,7 @@
 </value>
   </data>
   <data name="foreColor06ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColor06ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 6</value>
@@ -515,7 +486,7 @@
 </value>
   </data>
   <data name="foreColor07ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColor07ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 7</value>
@@ -529,7 +500,7 @@
 </value>
   </data>
   <data name="foreColor08ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColor08ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 8</value>
@@ -543,7 +514,7 @@
 </value>
   </data>
   <data name="foreColor09ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColor09ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 9</value>
@@ -557,7 +528,7 @@
 </value>
   </data>
   <data name="foreColor10ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="foreColor10ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 10</value>
@@ -579,13 +550,13 @@
     <value>29, 22</value>
   </data>
   <data name="BackColorNoneToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="BackColorNoneToolStripMenuItem.Text" xml:space="preserve">
     <value>None</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 6</value>
+    <value>149, 6</value>
   </data>
   <data name="BackColor01ToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -596,7 +567,7 @@
 </value>
   </data>
   <data name="BackColor01ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="BackColor01ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 1</value>
@@ -610,7 +581,7 @@
 </value>
   </data>
   <data name="BackColor02ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="BackColor02ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 2</value>
@@ -624,7 +595,7 @@
 </value>
   </data>
   <data name="BackColor03ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="BackColor03ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 3</value>
@@ -638,7 +609,7 @@
 </value>
   </data>
   <data name="BackColor04ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="BackColor04ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 4</value>
@@ -652,7 +623,7 @@
 </value>
   </data>
   <data name="BackColor05ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="BackColor05ToolStripMenuItem.Text" xml:space="preserve">
     <value>Color 5</value>
@@ -660,12 +631,12 @@
   <data name="backColorToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEbSURBVDhP1ZK/asJQFMa/NKGl2JaWYkvtUgN5gvYhCh37
-        Dt1Eggjq4iME3NxEcHJqVpcgQpeMjqLiH1TUvMLpl+aK0KFN7NQf/ODcc/gO98JFEno9ZFSZnG4Xz50O
-        fNdFXbXiswtvt5B+H0GrhTc1+p3v4WYTfqOBRzX+mX8aNgzjybKs94PCxNJ1ve44jpim+ZE0jF1Y0zSX
-        R5sLUtEkBvxlX29W4ZeoG59Muw2/VoOfzeKVZ4s+0Ht6Q6/oGT2hBtXonmIR55UK7spl3NJ0qYTrfB6X
-        uRwuCgWkbBun1SqOqUGPGNkv2GzghVcPZS3rNWS1giyXkMUCMp9DZjPIdAqZTCDjMWQ0ggyHkMEAHoIg
-        Ch+yIPSPN4D3CSe5+3TwX4GGAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE0SURBVDhPYxga4M2saJk3s8IuvZ0V9u3NzLAV/+vrmaBS
+        hMHrORFSQM0PgZr/I+GNRBnyYnaE+JtZoffRNEPwzNCFUGXYwbO5IaJAzXewaobgz1ClmODj5ABhoA03
+        sWiC4zczQy9ClaOCpzN9uICar2HTBMNAl71+Pi1QDKoFAbq7u7lbG+qK384MK8OmEYSBsfD25ZRQCagW
+        VNDQ0JAOxP+BhvS/mxlagUXze1CsQJVjAqDmQpABINzeVNP9ZmZINcKA0I9vZgXKQJViB/X19Y9gBoBw
+        Z1NNO9CQOqABn4EukoMqww7ezA5xnd1W4gHU+BvZkO7m6oY3E6P5oMqwgzczwt2AIf8dGHi3p7dVeAFd
+        8gWIc4C4Cojx2wwCQM1PgVHzF4xnhk1vbW0Vh0rRGjAwAABfJhH3bCPqVAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="backColorToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
@@ -677,16 +648,12 @@
   <data name="removeFormattingToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAH/SURBVDhPnZDPixJhHIffUbx40YsHb/5aEDzM0SI7VOS/
-        4D8gLwge9CAe0pa1WCFoWSRZKxb7sbVs1GLubmwnTURMRDQkjAQRwZptyt9ibPXtndnXlmGWRXrgucy8
-        z+cdBi3CPlqy7yuWbhBDr5HlAn28GEKQJuHvw/fw520JUgrLzV1kvkhfn0+aHBSCXwcF4J+9AX77UBx5
-        xZhXXiLTJXrsbIRbSLx8vJeHoyd78G3rQDKyw1hWt5HxMj0uJRqNskT8M/UOuGQKuMdpyUgzmoAf91/A
-        FmO+Q5NThDgSieDZbAaTyQS+bu5KRj7djsPn1Q34ntiBJGO6S7MTQqEQGw6H8XQ6heFw+M/5yMeVGDRu
-        3YOj+HMSG9cfKc1XaIpQMBhkA4EAHo/H0Ov1ZH4Ir0F9eR2+xJ7CJmOMPVCartIUIb/fz/p8PjwajYDn
-        eZmVSgWq1Sp01pLwkDHEE0rTNZoi5PV6WY/HgweDAXAcJ7NUKkG5XIZmswl2ux1vKI3XaXqC2+3G/X4f
-        ut2uzEKhAMViERqNBlitVmwwGFianeJyucSBTqcjMZfLQT6fh3q9Dnq9Hut0Onks4HQ6WYfDIY60223R
-        TCYD2WwWarUaaDQarFarz47n2Gw2lnwebrVa4g+bq1KpMPH8eI5Wq2XJTUKAFQoFJo8EF4v/H4T+AhRw
-        f+k3uW7dAAAAAElFTkSuQmCC
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEdSURBVDhPtVHNSgMxGIyCFooHzz15sB499HV8D2+SxSw9
+        FhY0Yc+9VtBXEPw59A28SLcJ1JaeFAQtcb7wpS3aQrQ4MOT7mRmSXfGvcMo8WaUdt7+Dzc2zy40noh7x
+        OA0w3UXz30OUmS6ZZ5XS17xKB4XgG3xGs1XmAYGDsEzFUJkenTbXj/FGLtdVWKbCKX2/MMdn6StepwEh
+        w3mAMpNB++KQV0JkWfa2jlLKDsvwd3QFjqtz08S8weMQ4FcRoj64673fwrlPWivLOnsknQHfjcwPmI55
+        f1IURS2IAcz3wBdu1wZc0g7CI/A0CBnYnZGG258BMLyD4Y3ob1DPPxjqA/CVdDxaeYMuzSFsoZ7h3Ka+
+        LMsd1LdRR7MNIcQXu14H8BiNwB4AAAAASUVORK5CYII=
 </value>
   </data>
   <data name="removeFormattingToolStripMenuItem.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">

@@ -5,6 +5,7 @@
     public interface IExternalInformationProvider
 	{
 	    Font Font { get; }
+        Color? ForeColor { get; }
 
 	    void SavePerUserPerWorkstationValue(
 			string name,

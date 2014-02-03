@@ -1,13 +1,15 @@
 namespace Test
 {
     using System;
+    using System.Drawing;
     using System.Globalization;
     using System.Threading;
     using System.Windows.Forms;
     using ZetaHtmlEditControl.Code.Configuration;
 
     public partial class TestFormForScreenshots :
-        Form
+        Form,
+        IExternalInformationProvider
     {
         private bool _ignore;
 
@@ -21,7 +23,7 @@ namespace Test
 
         private void TestForm_Shown(object sender, EventArgs e)
         {
-            htmlEditUserControl1.Configure(new HtmlEditControlConfiguration{AllowFontChange = false});
+            htmlEditUserControl1.Configure(new HtmlEditControlConfiguration{AllowFontChange = false, ExternalInformationProvider = this});
             htmlEditUserControl1.IsToolbarVisible = true;
 
             const string s3 = @"<p>ZetaHtmlEditControl.Code.HttpServer<br />
@@ -76,6 +78,38 @@ using Properties;</p>
                     var el = htmlEditUserControl1.HtmlEditControl.GetElementAtCaret();
                     infoTextBox.Text = el == null ? @"-" : el.tagName;
                 };
+        }
+
+        System.Drawing.Font IExternalInformationProvider.Font
+        {
+            get { return new Font(@"Times New Roman", 20, GraphicsUnit.Pixel); }
+        }
+
+        System.Drawing.Color? IExternalInformationProvider.ForeColor
+        {
+            get
+            {
+                return Color.Green;
+            }
+        }
+
+        void IExternalInformationProvider.SavePerUserPerWorkstationValue(string name, string value)
+        {
+        }
+
+        string IExternalInformationProvider.RestorePerUserPerWorkstationValue(string name, string fallBackTo)
+        {
+            return null;
+        }
+
+        TextModuleInfo[] IExternalInformationProvider.GetTextModules()
+        {
+            return null;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this, htmlEditUserControl1.HtmlEditControl.DocumentText);
         }
     }
 }

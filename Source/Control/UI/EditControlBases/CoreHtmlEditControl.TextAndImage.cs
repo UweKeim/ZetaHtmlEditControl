@@ -13,7 +13,7 @@
         private const string CssFontStyle =
             @"font-family: Segoe UI, Tahoma, Verdana, Arial; font-size: {font-size}; ";
 
-        private static string _defaultCssText = @"body { {font-style}; margin: 4px; }
+        private static string _defaultCssText = @"body { {font-style}; margin: 4px; {color}; }
 			li { margin-bottom: 5pt; }
 			table {
 				border-width: 1px;
@@ -121,6 +121,15 @@
         }
 
         /// <summary>
+        /// Wenn hier ein Wert drin steht, dann wird der Wert für eingefügte Links
+        /// verwendet.
+        /// </summary>
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string TargetForLinks { get; set; }
+
+        /// <summary>
         /// Gets or sets the HTML content.
         /// </summary>
         [Browsable(false)]
@@ -158,9 +167,20 @@
             set { _cssFontSize = value; }
         }
 
+        public string CssColor
+        {
+            get
+            {
+                var color = ForeColor;
+                return string.Format(@"#{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B);
+            }
+        }
+
         private void constructCoreHtmlEditControlTextAndImage()
         {
             _htmlConversionHelper = new HtmlConversionHelper();
+
+            TargetForLinks = @"_blank";
         }
 
         public string MakeFullHtmlFromBody(
@@ -245,14 +265,16 @@
         {
             if (!string.IsNullOrEmpty(cssText) && cssText.Contains(@"{font-style}"))
             {
-                var result = cssText.Replace(@"{font-style}", CssFontStyle);
-                result = result.Replace(@"{font-size}", CssFontSize);
-                return result;
+                cssText = cssText.Replace(@"{font-style}", CssFontStyle);
+                cssText = cssText.Replace(@"{font-size}", CssFontSize);
             }
-            else
+
+            if (!string.IsNullOrEmpty(cssText) && cssText.Contains(@"{color}"))
             {
-                return cssText;
+                cssText = cssText.Replace(@"{color}", string.Format(@"color: {0}", CssColor));
             }
+
+            return cssText;
         }
 
         private string getCssFontSizeWithUnit()
@@ -279,49 +301,60 @@
             }
         }
 
-        private float getFontScaleFactor()
-        {
-            var myFont = Font;
-            var sysFont = SystemFonts.DialogFont;
-
-            var sizeInPixel1 = getSizeInPixel(myFont);
-            var sizeInPixel2 = getSizeInPixel(sysFont);
-
-            var factor = sizeInPixel1/sizeInPixel2;
-            return factor;
-        }
-
-        private float getSizeInPixel(Font f)
-        {
-            if (f.Unit == GraphicsUnit.Pixel)
-            {
-                return f.Size;
-            }
-            else
-            {
-                var dpi = getDpi();
-                return f.SizeInPoints/72*dpi;
-            }
-        }
-
-        private float _dpi;
-        private float getDpi()
-        {
-            if (_dpi <= 0)
-            {
-                using (var gfx = CreateGraphics())
+        /*
+                private float getFontScaleFactor()
                 {
-                    _dpi = gfx.DpiY;
+                    var myFont = Font;
+                    var sysFont = SystemFonts.DialogFont;
+
+                    var sizeInPixel1 = getSizeInPixel(myFont);
+                    var sizeInPixel2 = getSizeInPixel(sysFont);
+
+                    var factor = sizeInPixel1 / sizeInPixel2;
+                    return factor;
                 }
-            }
+        */
 
-            return _dpi;
-        }
+        /*
+                private float getSizeInPixel(Font f)
+                {
+                    if (f.Unit == GraphicsUnit.Pixel)
+                    {
+                        return f.Size;
+                    }
+                    else
+                    {
+                        var dpi = getDpi();
+                        return f.SizeInPoints / 72 * dpi;
+                    }
+                }
+        */
 
-        private static string prepareDocumentTextGet(string html)
+        /*
+                private float _dpi;
+        */
+        /*
+                private float getDpi()
+                {
+                    if (_dpi <= 0)
+                    {
+                        using (var gfx = CreateGraphics())
+                        {
+                            _dpi = gfx.DpiY;
+                        }
+                    }
+
+                    return _dpi;
+                }
+        */
+
+        private string prepareDocumentTextGet(string html)
         {
             var s = html.GetBodyFromHtmlCode();
             s = Regex.Replace(s, @"<![^>]*>", string.Empty, RegexOptions.Singleline);
+
+            s = s.MakeLinkTargets(TargetForLinks);
+
             return s;
         }
 

@@ -529,6 +529,11 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
             {
                 var font = _configuration.ExternalInformationProvider.Font;
                 contextMenuStrip.Font = font ?? Font;
+
+                if (_configuration.ExternalInformationProvider.ForeColor.HasValue)
+                {
+                    contextMenuStrip.ForeColor = _configuration.ExternalInformationProvider.ForeColor.Value;
+                }
             }
             else
             {

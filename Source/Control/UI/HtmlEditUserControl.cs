@@ -144,13 +144,19 @@ namespace ZetaHtmlEditControl.UI
 
         private void applyFont()
         {
-            if (htmlEditControl.Configuration!=null && 
+            if (htmlEditControl.Configuration != null &&
                 htmlEditControl.Configuration.ExternalInformationProvider != null)
             {
                 var font = htmlEditControl.Configuration.ExternalInformationProvider.Font;
                 if (font != null)
                 {
                     Font = font;
+                }
+
+
+                if (htmlEditControl.Configuration.ExternalInformationProvider.ForeColor.HasValue)
+                {
+                    ForeColor = htmlEditControl.Configuration.ExternalInformationProvider.ForeColor.Value;
                 }
             }
 

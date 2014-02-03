@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Text.RegularExpressions;
+    using HtmlAgilityPack;
 
     internal static class HtmlStringHelper
     {
@@ -127,6 +128,45 @@
                 text = text.Replace("\n", @"<br />");
 
                 return text;
+            }
+        }
+
+        public static string MakeLinkTargets(this string html, string target)
+        {
+            if (string.IsNullOrWhiteSpace(html) || string.IsNullOrEmpty(target))
+            {
+                return html;
+            }
+            else
+            {
+                var doc = new HtmlDocument();
+                doc.LoadHtml(html);
+
+                // --
+
+                var anchorTagNodes = doc.DocumentNode.SelectNodes(@"//a");
+                if (anchorTagNodes != null)
+                {
+                    foreach (var anchorTagNode in anchorTagNodes)
+                    {
+                        var currentTarget = anchorTagNode.ReadAttributeValue(@"target");
+                        if (string.IsNullOrEmpty(currentTarget))
+                        {
+                            if (anchorTagNode.Attributes.Contains(@"target"))
+                            {
+                                anchorTagNode.Attributes[@"target"].Value = target;
+                            }
+                            else
+                            {
+                                anchorTagNode.Attributes.Add(@"target", target);
+                            }
+                        }
+                    }
+                }
+
+                // --
+
+                return doc.DocumentNode.OuterHtml;
             }
         }
 
