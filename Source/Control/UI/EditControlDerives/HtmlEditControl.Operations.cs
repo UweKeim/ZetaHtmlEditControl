@@ -244,15 +244,16 @@
             {
                 var doc = (HTMLDocument) Document.DomDocument;
 
-                if (IsTextSelection)
-                {
-                    var range = (IHTMLTxtRange) doc.selection.createRange();
+                doc.execCommand(@"Cut", false, null);
+                //if (IsTextSelection)
+                //{
+                //    var range = (IHTMLTxtRange) doc.selection.createRange();
 
-                    Clipboard.SetText(range.htmlText);
+                //    Clipboard.SetText(range.htmlText);
 
-                    // 2011-10-20, added.
-                    ExecuteDelete();
-                }
+                //    // 2011-10-20, added.
+                //    ExecuteDelete();
+                //}
             }
         }
 
