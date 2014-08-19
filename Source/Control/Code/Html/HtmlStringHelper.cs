@@ -7,15 +7,44 @@
 
     internal static class HtmlStringHelper
     {
-        internal static string GetBodyFromHtmlCode(
+        /// <summary>
+        /// Wenn aus Excel kopiert wird, sind das TABLE-Beginn- und Ende-Tag
+        /// jeweils _außerhalb_ vom kopierten Text. Das hier jetzt ergänzen.
+        /// </summary>
+        internal static string CheckCompleteHtmlTable(
             this string htmlCode)
         {
-            if (String.IsNullOrEmpty(htmlCode))
+            if (string.IsNullOrEmpty(htmlCode))
             {
                 return htmlCode;
             }
-            else if (htmlCode.IndexOf(@"<body",
-                StringComparison.InvariantCultureIgnoreCase) >= 0)
+            else
+            {
+                htmlCode = htmlCode.Trim();
+
+                if ((htmlCode.StartsWith(@"<col", StringComparison.InvariantCultureIgnoreCase) ||
+                     htmlCode.StartsWith(@"<tr")) &&
+                    htmlCode.EndsWith(@"</tr>", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    htmlCode = string.Format(@"<table>{0}</table>", htmlCode);
+                    htmlCode = htmlCode.CleanMsExcelHtml();
+                    return htmlCode;
+                }
+                else
+                {
+                    return htmlCode;
+                }
+            }
+        }
+
+        internal static string GetBodyFromHtmlCode(
+            this string htmlCode)
+        {
+            if (string.IsNullOrEmpty(htmlCode))
+            {
+                return htmlCode;
+            }
+            else if (htmlCode.IndexOf(@"<body", StringComparison.InvariantCultureIgnoreCase) >= 0)
             {
                 var regex = new Regex(
                     @".*?<body[^>]*>(.*?)</body>",
@@ -170,7 +199,39 @@
             }
         }
 
-        public static string CleanMsWordHtml(this string html)
+        public static string CleanMsExcelHtml(this string html)
+        {
+            if (string.IsNullOrWhiteSpace(html))
+            {
+                return html;
+            }
+            else
+            {
+                var sc =
+                    new[]
+                {
+                    @"<col\b[^>]*>",
+                    @"\s?height=\w+",
+                    @"\s?height='[^']+'",
+                    @"\s?height=""[^""]+""",
+                    @"\s?width=\w+",
+                    @"\s?width='[^']+'",
+                    @"\s?width=""[^""]+""",
+                    @"\s?class=\w+",
+                    @"\s?class='[^']+'",
+                    @"\s?class=""[^""]+""",
+                    @"\s+style='[^']+'",
+                    @"\s+style=""[^""]+""",
+                    @"\s+v:\w+=""[^""]+""",
+                    @"(\n\r){2,}"
+                };
+
+                return sc.Aggregate(html, (current, s) => Regex.Replace(current, s, String.Empty, RegexOptions.IgnoreCase));
+            }
+        }
+
+        public static
+            string CleanMsWordHtml(this string html)
         {
             if (string.IsNullOrWhiteSpace(html))
             {

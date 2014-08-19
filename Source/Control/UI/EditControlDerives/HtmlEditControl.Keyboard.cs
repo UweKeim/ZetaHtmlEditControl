@@ -10,71 +10,78 @@
         public override bool PreProcessMessage(
             ref Message msg)
         {
-            if (msg.Msg == NativeMethods.WmKeydown || msg.Msg == NativeMethods.WmSyskeydown)
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
-                var isShift = (ModifierKeys & Keys.Shift) != 0;
-
-                var key = ((Keys) ((int) msg.WParam));
-
-                var e = new PreviewKeyDownEventArgs(key | ModifierKeys);
-
-                // Check all shortcuts that I handle by myself.
-                if (doHandleShortcutKey(e, false))
+                if (msg.Msg == NativeMethods.WmKeydown || msg.Msg == NativeMethods.WmSyskeydown)
                 {
-                    return true;
-                }
-                else
-                {
-                    if (key == Keys.Enter)
+                    var isShift = (ModifierKeys & Keys.Shift) != 0;
+
+                    var key = ((Keys)((int)msg.WParam));
+
+                    var e = new PreviewKeyDownEventArgs(key | ModifierKeys);
+
+                    // Check all shortcuts that I handle by myself.
+                    if (doHandleShortcutKey(e, false))
                     {
-                        // 2010-11-02, Uwe Keim:
-                        // Just as in TortoiseSVN dialogs, use Ctrl+Enter as default button.
-                        if (e.Control && !e.Alt && !e.Shift)
-                        {
-                            closeDialogWithOK();
-                            return true;
-                        }
-
-                        if (!e.Alt && !e.Shift && !e.Control)
-                        {
-                            return handleEnterKey();
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                        return true;
                     }
-                    if (key == Keys.Tab)
+                    else
                     {
-                        // TAB key.
-                        if (!e.Control && !e.Alt)
+                        if (key == Keys.Enter)
                         {
-                            if (handleTabKeyInsideTable(isShift))
+                            // 2010-11-02, Uwe Keim:
+                            // Just as in TortoiseSVN dialogs, use Ctrl+Enter as default button.
+                            if (e.Control && !e.Alt && !e.Shift)
                             {
+                                closeDialogWithOK();
                                 return true;
+                            }
+
+                            if (!e.Alt && !e.Shift && !e.Control)
+                            {
+                                return handleEnterKey();
                             }
                             else
                             {
-                                // Forward or backward?
-                                var forward = !isShift;
-
-                                var form = FindForm();
-                                if (form != null)
+                                return false;
+                            }
+                        }
+                        if (key == Keys.Tab)
+                        {
+                            // TAB key.
+                            if (!e.Control && !e.Alt)
+                            {
+                                if (handleTabKeyInsideTable(isShift))
                                 {
-                                    var c = form.GetNextControl(this, forward);
-
-                                    while (c != null &&
-                                           c != this &&
-                                           !c.TabStop)
-                                    {
-                                        c = form.GetNextControl(c, forward);
-                                    }
-
-                                    if (c != null)
-                                    {
-                                        c.Focus();
-                                    }
+                                    return true;
                                 }
+                                else
+                                {
+                                    // Forward or backward?
+                                    var forward = !isShift;
+
+                                    var form = FindForm();
+                                    if (form != null)
+                                    {
+                                        var c = form.GetNextControl(this, forward);
+
+                                        while (c != null &&
+                                               c != this &&
+                                               !c.TabStop)
+                                        {
+                                            c = form.GetNextControl(c, forward);
+                                        }
+
+                                        if (c != null)
+                                        {
+                                            c.Focus();
+                                        }
+                                    }
+                                    return false;
+                                }
+                            }
+                            else
+                            {
                                 return false;
                             }
                         }
@@ -82,10 +89,6 @@
                         {
                             return false;
                         }
-                    }
-                    else
-                    {
-                        return false;
                     }
                 }
             }
@@ -167,7 +170,7 @@
                         else
                         {
                             // Previous line, last cell.
-                            var table = (IHTMLTable) CurrentSelectionTable;
+                            var table = (IHTMLTable)CurrentSelectionTable;
                             var previousRow =
                                 (IHTMLTableRow)
                                     table.rows.item(
@@ -204,7 +207,7 @@
                                  rowIndex < rowCount - 1)
                         {
                             // Next row, first cell.
-                            var table = (IHTMLTable) CurrentSelectionTable;
+                            var table = (IHTMLTable)CurrentSelectionTable;
                             var nextRow = (IHTMLTableRow)
                                 table.rows.item(
                                     rowIndex + 1,
@@ -234,7 +237,7 @@
             PreviewKeyDownEventArgs e,
             bool onlyCheck)
         {
-            if (e.KeyCode == Keys.V && e.Control && e.Shift ) //v + ctrl + shift
+            if (e.KeyCode == Keys.V && e.Control && e.Shift) //v + ctrl + shift
             {
                 if (!onlyCheck)
                 {

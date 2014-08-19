@@ -4,6 +4,7 @@ namespace Test
     using System.Threading;
     using System.Windows.Forms;
     using ZetaHtmlEditControl.Code.MsHtml;
+    using ZetaHtmlEditControl.UI;
 
     static class Program
     {
@@ -13,6 +14,8 @@ namespace Test
             Application.ThreadException += applicationThreadException;
             Application.SetUnhandledExceptionMode( UnhandledExceptionMode.CatchException);
             AppDomain.CurrentDomain.UnhandledException += currentDomainUnhandledException;
+
+            HtmlEditorDesignModeManager.IsDesignMode = false;
 
             try
             {

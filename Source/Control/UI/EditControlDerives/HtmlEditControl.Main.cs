@@ -39,22 +39,25 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
         {
             InitializeComponent();
 
-            AllowWebBrowserDrop = false;
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
+            {
+                AllowWebBrowserDrop = false;
 
-            Navigate(@"about:blank");
+                Navigate(@"about:blank");
 
-            _tmpFolderPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
-            Directory.CreateDirectory(_tmpFolderPath);
+                _tmpFolderPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                Directory.CreateDirectory(_tmpFolderPath);
 
-            _timerTextChange.Tick += timerTextChange_Tick;
-            _timerTextChange.Interval = 200;
-            _timerTextChange.Start();
+                _timerTextChange.Tick += timerTextChange_Tick;
+                _timerTextChange.Interval = 200;
+                _timerTextChange.Start();
 
-            // --
+                // --
 
-            constructHtmlEditControlKeyboard();
+                constructHtmlEditControlKeyboard();
 
-            Configure(Configuration);
+                Configure(Configuration);
+            }
         }
 
         [Browsable(false)]
@@ -88,20 +91,23 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
 
         protected override void DestroyHandle()
         {
-            if (_timerTextChange != null)
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
-                _timerTextChange.Stop();
-                _timerTextChange.Dispose();
-                _timerTextChange = null;
-            }
-
-            if (!string.IsNullOrEmpty(_tmpFolderPath))
-            {
-                if (Directory.Exists(_tmpFolderPath))
+                if (_timerTextChange != null)
                 {
-                    Directory.Delete(_tmpFolderPath, true);
+                    _timerTextChange.Stop();
+                    _timerTextChange.Dispose();
+                    _timerTextChange = null;
                 }
-                _tmpFolderPath = null;
+
+                if (!string.IsNullOrEmpty(_tmpFolderPath))
+                {
+                    if (Directory.Exists(_tmpFolderPath))
+                    {
+                        Directory.Delete(_tmpFolderPath, true);
+                    }
+                    _tmpFolderPath = null;
+                }
             }
 
             base.DestroyHandle();
@@ -121,11 +127,14 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
         {
             base.OnGotFocus(e);
 
-            if (Document != null)
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
-                if (Document.Body != null)
+                if (Document != null)
                 {
-                    Document.Body.Focus();
+                    if (Document.Body != null)
+                    {
+                        Document.Body.Focus();
+                    }
                 }
             }
         }
@@ -134,12 +143,15 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
         {
             base.OnNavigated(e);
 
-            if (_firstCreate)
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
-                _firstCreate = false;
+                if (_firstCreate)
+                {
+                    _firstCreate = false;
 
-                // 2012-08-28, Uwe Keim: Enable gray shortcut texts.
-                contextMenuStrip.Renderer = new MyToolStripRender();
+                    // 2012-08-28, Uwe Keim: Enable gray shortcut texts.
+                    contextMenuStrip.Renderer = new MyToolStripRender();
+                }
             }
         }
 
@@ -147,7 +159,8 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
             object sender,
             EventArgs e)
         {
-            if (!IsDisposed) // Uwe Keim 2006-03-17.
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode) {
+                if (!IsDisposed) // Uwe Keim 2006-03-17.
             {
                 var s = DocumentText ?? string.Empty;
 
@@ -158,7 +171,7 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
                     var h = TextChanged;
                     if (h != null) h(this, new EventArgs());
                 }
-            }
+            }}
         }
 
         public new event EventHandler TextChanged;
@@ -467,8 +480,11 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
 
         protected override void OnUpdateUI()
         {
-            var h = UINeedsUpdate;
-            if (h != null) h(this, EventArgs.Empty);
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
+            {
+                var h = UINeedsUpdate;
+                if (h != null) h(this, EventArgs.Empty);
+            }
         }
 
         public event EventHandler UINeedsUpdate;
@@ -482,11 +498,11 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
 
             foreach (var textModule in _textModules)
             {
-                var mi = new ToolStripMenuItem(textModule.Name) {Tag = textModule};
+                var mi = new ToolStripMenuItem(textModule.Name) { Tag = textModule };
 
                 mi.Click += delegate
                 {
-                    var tm = (TextModuleInfo) mi.Tag;
+                    var tm = (TextModuleInfo)mi.Tag;
                     InsertHtmlAtCurrentSelection(tm.Html);
                 };
 
@@ -525,22 +541,26 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
         {
             base.OnNeedShowContextMenu(contextMenuKind, position, queryForStatus, objectAtScreenCoordinates);
 
-            if (_configuration != null && _configuration.ExternalInformationProvider != null)
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
-                var font = _configuration.ExternalInformationProvider.Font;
-                contextMenuStrip.Font = font ?? Font;
-
-                if (_configuration.ExternalInformationProvider.ForeColor.HasValue)
+                if (_configuration != null && _configuration.ExternalInformationProvider != null)
                 {
-                    contextMenuStrip.ForeColor = _configuration.ExternalInformationProvider.ForeColor.Value;
+                    var font = _configuration.ExternalInformationProvider.Font;
+                    contextMenuStrip.Font = font ?? Font;
+
+                    if (_configuration.ExternalInformationProvider.ForeColor.HasValue)
+                    {
+                        contextMenuStrip.ForeColor = _configuration.ExternalInformationProvider.ForeColor.Value;
+                    }
                 }
-            }
-            else
-            {
-                contextMenuStrip.Font = Font;
+                else
+                {
+                    contextMenuStrip.Font = Font;
+                }
+
+                contextMenuStrip.Show(position);
             }
 
-            contextMenuStrip.Show(position);
             return true;
         }
 

@@ -250,7 +250,7 @@ namespace ZetaHtmlEditControl.Code.Html
             string file,
             Uri baseUri)
         {
-            if (file.StartsWith(@"http") || file.StartsWith(@"https"))
+            if (file.StartsWith(@"http") || file.StartsWith(@"https") || baseUri==null)
             {
                 return file;
             }
@@ -314,7 +314,7 @@ namespace ZetaHtmlEditControl.Code.Html
             Uri baseUri)
         {
             // 2006-12-03 Uwe Keim, fix for not copying images.
-            if (String.Compare(baseUri.OriginalString, @"about:blank",
+            if (baseUri == null || String.Compare(baseUri.OriginalString, @"about:blank",
                 StringComparison.OrdinalIgnoreCase) == 0)
             {
                 return s;

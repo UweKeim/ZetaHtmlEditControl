@@ -73,10 +73,7 @@
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string CssText
         {
-            set
-            {
-                _cssText = value;
-            }
+            set { _cssText = value; }
         }
 
         /// <summary>
@@ -137,14 +134,8 @@
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new string DocumentText
         {
-            get
-            {
-                return prepareDocumentTextGet(MsHtmlLegacyFromBadToGoodTranslator.Translate(base.DocumentText));
-            }
-            set
-            {
-                base.DocumentText = prepareDocumentTextSet(MsHtmlLegacyFromGoodToBadTranslator.Translate(value));
-            }
+            get { return prepareDocumentTextGet(MsHtmlLegacyFromBadToGoodTranslator.Translate(base.DocumentText)); }
+            set { base.DocumentText = prepareDocumentTextSet(MsHtmlLegacyFromGoodToBadTranslator.Translate(value)); }
         }
 
         [Browsable(false)]
@@ -152,10 +143,7 @@
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string TextOnlyFromDocumentBody
         {
-            get
-            {
-                return base.DocumentText.GetBodyFromHtmlCode().GetOnlyTextFromHtmlCode();
-            }
+            get { return base.DocumentText.GetBodyFromHtmlCode().GetOnlyTextFromHtmlCode(); }
         }
 
         [Browsable(false)]
@@ -232,7 +220,7 @@
 
         private string prepareDocumentTextSet(string html)
         {
-            return buildCompleteHtml(html.GetBodyFromHtmlCode());
+            return buildCompleteHtml(html.GetBodyFromHtmlCode().CheckCompleteHtmlTable());
         }
 
         private string buildCompleteHtml(string htmlBody)
@@ -364,7 +352,7 @@
 
             if (_htmlConversionHelper != null)
             {
-                ((IDisposable)_htmlConversionHelper).Dispose();
+                ((IDisposable) _htmlConversionHelper).Dispose();
                 _htmlConversionHelper = null;
             }
         }

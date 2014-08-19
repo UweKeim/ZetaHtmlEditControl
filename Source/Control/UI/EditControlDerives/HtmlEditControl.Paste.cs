@@ -11,7 +11,7 @@
     public partial class HtmlEditControl
     {
         private void handlePaste(
-            PasteMode asTextOnly)
+            PasteMode pasteMode)
         {
             if (Document != null)
             {
@@ -24,7 +24,10 @@
 
                 string html;
 
-                if (Clipboard.ContainsImage())
+                if (Clipboard.ContainsImage() &&
+                    // 2014-08-19, Uwe Keim: Excel hat HTML _und_ Bild, deshalb hier prüfen, sonst
+                    //                       wird Excel auch als Bild eingefügt.
+                    !Clipboard.ContainsText(TextDataFormat.Html)) 
                 {
                     var image = Clipboard.GetImage();
                     var file = Path.Combine(_tmpFolderPath, _objectID.ToString(CultureInfo.InvariantCulture));
@@ -50,18 +53,18 @@
                 }
                 else
                 {
-                    if (asTextOnly != PasteMode.Text && Clipboard.ContainsText(TextDataFormat.Html))
+                    if (pasteMode != PasteMode.Text && Clipboard.ContainsText(TextDataFormat.Html))
                     {
-                        //only body from fragment
-                        html = HtmlClipboardHelper.GetHtmlFromClipboard().GetBodyFromHtmlCode();
+                        // only body from fragment
+                        html = HtmlClipboardHelper.GetHtmlFromClipboard().GetBodyFromHtmlCode().CheckCompleteHtmlTable();
 
-                        //images save or load from web
+                        // images save or load from web
                         html = checkImages(
                             HtmlConversionHelper.FindImgs(html),
                             html,
                             HtmlClipboardHelper.GetSourceUrlFromClipboard());
 
-                        if (asTextOnly == PasteMode.MsWord)
+                        if (pasteMode == PasteMode.MsWord)
                         {
                             html = html.CleanMsWordHtml();
                         }
@@ -70,7 +73,7 @@
                     {
                         html = Clipboard.GetText(TextDataFormat.UnicodeText);
 
-                        if (asTextOnly == PasteMode.Text)
+                        if (pasteMode == PasteMode.Text)
                         {
                             html = html.GetOnlyTextFromHtmlCode();
                         }
@@ -82,7 +85,7 @@
                     {
                         html = Clipboard.GetText(TextDataFormat.Text);
 
-                        if (asTextOnly == PasteMode.Text)
+                        if (pasteMode == PasteMode.Text)
                         {
                             html = html.GetOnlyTextFromHtmlCode();
                         }

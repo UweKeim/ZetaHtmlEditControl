@@ -93,6 +93,11 @@ using Properties;</p>
             }
         }
 
+        public Color? ControlBorderColor
+        {
+            get { return null; }
+        }
+
         void IExternalInformationProvider.SavePerUserPerWorkstationValue(string name, string value)
         {
         }

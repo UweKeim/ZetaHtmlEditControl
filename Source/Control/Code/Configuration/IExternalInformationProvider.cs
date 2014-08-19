@@ -6,6 +6,7 @@
 	{
 	    Font Font { get; }
         Color? ForeColor { get; }
+        Color? ControlBorderColor { get; }
 
 	    void SavePerUserPerWorkstationValue(
 			string name,

@@ -27,7 +27,7 @@ namespace ZetaHtmlEditControl.UI
 
             InitializeComponent();
 
-            if (!DesignMode)
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
                 fontNameToolStripComboBox.Items.Add(DefaultFontValue);
                 foreach (var family in new InstalledFontCollection().Families)
@@ -144,19 +144,26 @@ namespace ZetaHtmlEditControl.UI
 
         private void applyFont()
         {
-            if (htmlEditControl.Configuration != null &&
-                htmlEditControl.Configuration.ExternalInformationProvider != null)
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
-                var font = htmlEditControl.Configuration.ExternalInformationProvider.Font;
-                if (font != null)
+                if (htmlEditControl.Configuration != null &&
+                htmlEditControl.Configuration.ExternalInformationProvider != null)
                 {
-                    Font = font;
-                }
+                    var font = htmlEditControl.Configuration.ExternalInformationProvider.Font;
+                    if (font != null)
+                    {
+                        Font = font;
+                    }
 
+                    if (htmlEditControl.Configuration.ExternalInformationProvider.ForeColor.HasValue)
+                    {
+                        ForeColor = htmlEditControl.Configuration.ExternalInformationProvider.ForeColor.Value;
+                    }
 
-                if (htmlEditControl.Configuration.ExternalInformationProvider.ForeColor.HasValue)
-                {
-                    ForeColor = htmlEditControl.Configuration.ExternalInformationProvider.ForeColor.Value;
+                    if (htmlEditControl.Configuration.ExternalInformationProvider.ControlBorderColor.HasValue)
+                    {
+                        panel1.BackColor = htmlEditControl.Configuration.ExternalInformationProvider.ControlBorderColor.Value;
+                    }
                 }
             }
 
@@ -165,60 +172,63 @@ namespace ZetaHtmlEditControl.UI
 
         private void updateButtons()
         {
-            fontNameToolStripComboBox.Enabled =
-                fontSizeToolStripComboBox.Enabled = htmlEditControl.CanChangeFont;
-            boldToolStripMenuItem.Enabled = htmlEditControl.CanBold;
-            italicToolStripMenuItem.Enabled = htmlEditControl.CanItalic;
-            underlineToolStripButton.Enabled = htmlEditControl.CanUnderline;
-            bullettedListToolStripMenuItem.Enabled = htmlEditControl.CanBullettedList;
-            numberedListToolStripMenuItem.Enabled = htmlEditControl.CanOrderedList;
-            indentToolStripMenuItem.Enabled = htmlEditControl.CanIndent;
-            outdentToolStripMenuItem.Enabled = htmlEditControl.CanOutdent;
-            insertTableToolStripMenuItem.Enabled = htmlEditControl.CanInsertTable;
-            foreColorToolStripMenuItem.Enabled = htmlEditControl.CanForeColor;
-            backColorToolStripMenuItem.Enabled = htmlEditControl.CanBackColor;
-            undoToolStripButton.Enabled = htmlEditControl.CanUndo;
-            justifyLeftToolStripButton.Enabled = htmlEditControl.CanJustifyLeft;
-            justifyCenterToolStripButton.Enabled = htmlEditControl.CanJustifyCenter;
-            justifyRightToolStripButton.Enabled = htmlEditControl.CanJustifyRight;
-            removeFormattingToolStripMenuItem.Enabled = htmlEditControl.CanRemoveFormatting;
-
-            // --
-
-            boldToolStripMenuItem.Checked = htmlEditControl.IsBold;
-            italicToolStripMenuItem.Checked = htmlEditControl.IsItalic;
-            underlineToolStripButton.Checked = htmlEditControl.IsUnderline;
-            numberedListToolStripMenuItem.Checked = htmlEditControl.IsBullettedList;
-            bullettedListToolStripMenuItem.Checked = htmlEditControl.IsOrderedList;
-            justifyLeftToolStripButton.Checked = htmlEditControl.IsJustifyLeft;
-            justifyCenterToolStripButton.Checked = htmlEditControl.IsJustifyCenter;
-            justifyRightToolStripButton.Checked = htmlEditControl.IsJustifyRight;
-
-            textModulesToolStripItem.Visible = htmlEditControl.HasTextModules;
-
-            _updateCount++;
-
-            // If WebBrowser is queried for the font properties at the initialization stage (updateCount==1)
-            // then the rendering engine is pushed in a different rendering mode. 
-            // 
-            // This manifest itself in the following observable conditions:
-            //   - Font=="Times New Roman"
-            //   - Double-click triggers word selection
-            //   - Spell-checker is disabled
-            //   - AppDomain raises non-critical COM DRAGDROP_E_NOTREGISTERED Exception
-            //   
-            // While the default behaviour is:
-            //   - Font=="Segoe UI"
-            //   - Double-click does not trigger word selection
-            //   - Spell-checker is enabled
-            //   
-            if (!IE10RenderingMode || _updateCount > 1)
+            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
-                if (fontNameToolStripComboBox.Enabled)
-                    fontNameToolStripComboBox.SelectedItem = htmlEditControl.FontName ?? DefaultFontValue;
+                fontNameToolStripComboBox.Enabled =
+                    fontSizeToolStripComboBox.Enabled = htmlEditControl.CanChangeFont;
+                boldToolStripMenuItem.Enabled = htmlEditControl.CanBold;
+                italicToolStripMenuItem.Enabled = htmlEditControl.CanItalic;
+                underlineToolStripButton.Enabled = htmlEditControl.CanUnderline;
+                bullettedListToolStripMenuItem.Enabled = htmlEditControl.CanBullettedList;
+                numberedListToolStripMenuItem.Enabled = htmlEditControl.CanOrderedList;
+                indentToolStripMenuItem.Enabled = htmlEditControl.CanIndent;
+                outdentToolStripMenuItem.Enabled = htmlEditControl.CanOutdent;
+                insertTableToolStripMenuItem.Enabled = htmlEditControl.CanInsertTable;
+                foreColorToolStripMenuItem.Enabled = htmlEditControl.CanForeColor;
+                backColorToolStripMenuItem.Enabled = htmlEditControl.CanBackColor;
+                undoToolStripButton.Enabled = htmlEditControl.CanUndo;
+                justifyLeftToolStripButton.Enabled = htmlEditControl.CanJustifyLeft;
+                justifyCenterToolStripButton.Enabled = htmlEditControl.CanJustifyCenter;
+                justifyRightToolStripButton.Enabled = htmlEditControl.CanJustifyRight;
+                removeFormattingToolStripMenuItem.Enabled = htmlEditControl.CanRemoveFormatting;
 
-                if (fontSizeToolStripComboBox.Enabled)
-                    fontSizeToolStripComboBox.SelectedIndex = htmlEditControl.FontSize; //0 means "default font"
+                // --
+
+                boldToolStripMenuItem.Checked = htmlEditControl.IsBold;
+                italicToolStripMenuItem.Checked = htmlEditControl.IsItalic;
+                underlineToolStripButton.Checked = htmlEditControl.IsUnderline;
+                numberedListToolStripMenuItem.Checked = htmlEditControl.IsBullettedList;
+                bullettedListToolStripMenuItem.Checked = htmlEditControl.IsOrderedList;
+                justifyLeftToolStripButton.Checked = htmlEditControl.IsJustifyLeft;
+                justifyCenterToolStripButton.Checked = htmlEditControl.IsJustifyCenter;
+                justifyRightToolStripButton.Checked = htmlEditControl.IsJustifyRight;
+
+                textModulesToolStripItem.Visible = htmlEditControl.HasTextModules;
+
+                _updateCount++;
+
+                // If WebBrowser is queried for the font properties at the initialization stage (updateCount==1)
+                // then the rendering engine is pushed in a different rendering mode. 
+                // 
+                // This manifest itself in the following observable conditions:
+                //   - Font=="Times New Roman"
+                //   - Double-click triggers word selection
+                //   - Spell-checker is disabled
+                //   - AppDomain raises non-critical COM DRAGDROP_E_NOTREGISTERED Exception
+                //   
+                // While the default behaviour is:
+                //   - Font=="Segoe UI"
+                //   - Double-click does not trigger word selection
+                //   - Spell-checker is enabled
+                //   
+                if (!IE10RenderingMode || _updateCount > 1)
+                {
+                    if (fontNameToolStripComboBox.Enabled)
+                        fontNameToolStripComboBox.SelectedItem = htmlEditControl.FontName ?? DefaultFontValue;
+
+                    if (fontSizeToolStripComboBox.Enabled)
+                        fontSizeToolStripComboBox.SelectedIndex = htmlEditControl.FontSize; //0 means "default font"
+                }
             }
         }
 
