@@ -210,12 +210,14 @@
             string externalImagesFolderPath,
             bool useImagesFolderPathPlaceHolder)
         {
-            return
+            var result =
                 _htmlConversionHelper.ConvertGetHtml(
                     DocumentText,
                     Document == null ? null : Document.Url,
                     externalImagesFolderPath,
                     useImagesFolderPathPlaceHolder ? HtmlImageHelper.ImagesFolderPathPlaceHolder : null);
+
+            return result;
         }
 
         private string prepareDocumentTextSet(string html)
@@ -338,12 +340,14 @@
 
         private string prepareDocumentTextGet(string html)
         {
-            var s = html.GetBodyFromHtmlCode();
-            s = Regex.Replace(s, @"<![^>]*>", string.Empty, RegexOptions.Singleline);
+            var result = html.GetBodyFromHtmlCode();
+            result = Regex.Replace(result, @"<![^>]*>", string.Empty, RegexOptions.Singleline);
 
-            s = s.MakeLinkTargets(TargetForLinks);
+            if (Configuration.ReplaceNonBreakingSpaceOnGet) result = result.Replace(@"&nbsp;", @" ");
 
-            return s;
+            result = result.MakeLinkTargets(TargetForLinks);
+
+            return result;
         }
 
         protected override void Dispose(bool disposing)
@@ -352,7 +356,7 @@
 
             if (_htmlConversionHelper != null)
             {
-                ((IDisposable) _htmlConversionHelper).Dispose();
+                ((IDisposable)_htmlConversionHelper).Dispose();
                 _htmlConversionHelper = null;
             }
         }

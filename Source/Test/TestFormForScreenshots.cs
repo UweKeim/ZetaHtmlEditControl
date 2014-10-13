@@ -23,7 +23,12 @@ namespace Test
 
         private void TestForm_Shown(object sender, EventArgs e)
         {
-            htmlEditUserControl1.Configure(new HtmlEditControlConfiguration{AllowFontChange = false, ExternalInformationProvider = this});
+            htmlEditUserControl1.Configure(new HtmlEditControlConfiguration
+            {
+                AllowFontChange = false,
+                ExternalInformationProvider = this,
+                ReplaceNonBreakingSpaceOnGet = true
+            });
             htmlEditUserControl1.IsToolbarVisible = true;
 
             const string s3 = @"<p>ZetaHtmlEditControl.Code.HttpServer<br />

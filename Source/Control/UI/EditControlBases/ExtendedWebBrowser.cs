@@ -167,36 +167,12 @@
 
         private void turnWebBrowserDesignModeOn()
 		{
-			var instance =
-				NewLateBinding.LateGet(
-					ActiveXInstance,
-					null,
-					@"Document",
-					new object[0],
-					null,
-					null,
-					null);
-
-			NewLateBinding.LateSetComplex(
-				instance,
-				null,
-				@"designMode",
-				new object[] {@"On"},
-				null,
-				null,
-				false,
-				true);
-
-			_wasOn = true;
-		}
-
-		private void turnWebBrowserDesignModeOff()
-		{
-			if (_wasOn)
+			var axInstance = ActiveXInstance;
+			if( axInstance!=null ) 
 			{
 				var instance =
 					NewLateBinding.LateGet(
-						ActiveXInstance,
+						axInstance,
 						null,
 						@"Document",
 						new object[0],
@@ -208,11 +184,43 @@
 					instance,
 					null,
 					@"designMode",
-					new object[] {@"Off"},
+					new object[] {@"On"},
 					null,
 					null,
 					false,
 					true);
+
+				_wasOn = true;
+			}
+		}
+
+		private void turnWebBrowserDesignModeOff()
+		{
+			if (_wasOn)
+			{
+				var axInstance = ActiveXInstance;
+				if( axInstance!=null ) 
+				{
+					var instance =
+						NewLateBinding.LateGet(
+							axInstance,
+							null,
+							@"Document",
+							new object[0],
+							null,
+							null,
+							null);
+
+					NewLateBinding.LateSetComplex(
+						instance,
+						null,
+						@"designMode",
+						new object[] {@"Off"},
+						null,
+						null,
+						false,
+						true);
+				}
 			}
 		}
 	}

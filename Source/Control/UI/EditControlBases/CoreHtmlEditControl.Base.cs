@@ -5,9 +5,27 @@
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.ComTypes;
     using System.Windows.Forms;
+    using Code.Configuration;
     using Code.PInvoke;
     using mshtml;
     using IDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
+
+    public partial class CoreHtmlEditControl
+    {
+        private HtmlEditControlConfiguration _configuration = new HtmlEditControlConfiguration();
+
+        public HtmlEditControlConfiguration Configuration
+        {
+            get { return _configuration; }
+        }
+
+        public virtual void Configure(HtmlEditControlConfiguration configuration)
+        {
+            if (configuration == null) throw new ArgumentNullException(@"configuration");
+
+            _configuration = configuration;
+        }
+    }
 
     public partial class CoreHtmlEditControl :
         ExtendedWebBrowser,
@@ -321,7 +339,7 @@
                     _customDocUIHandlerSet = true;
 
                     var doc = DomDocument;
-                    var cd = (UnsafeNativeMethods.ICustomDoc)doc;
+                    var cd = (UnsafeNativeMethods.ICustomDoc) doc;
 
                     // Set the IDocHostUIHandler.
                     cd.SetUIHandler(this);
@@ -329,12 +347,16 @@
 
                 // --
 
-                var oe = (UnsafeNativeMethods.IOleObject)ActiveXInstance;
+                var axInstance = ActiveXInstance;
+                if (axInstance != null)
+                {
+                    var oe = (UnsafeNativeMethods.IOleObject) axInstance;
 
-                // 2013-05-19, Uwe Keim:
-                // Hier wird konfiguriert, dass diese Klasse IServiceProvider-Anfragen
-                // erhalten kann.
-                oe.SetClientSite(this);
+                    // 2013-05-19, Uwe Keim:
+                    // Hier wird konfiguriert, dass diese Klasse IServiceProvider-Anfragen
+                    // erhalten kann.
+                    oe.SetClientSite(this);
+                }
             }
         }
 

@@ -25,7 +25,6 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
     public partial class HtmlEditControl :
         CoreHtmlEditControl
     {
-        private HtmlEditControlConfiguration _configuration = new HtmlEditControlConfiguration();
         private bool _everLoadedTextModules;
         private bool _firstCreate = true;
         private int _objectID = 1;
@@ -84,11 +83,6 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
             }
         }
 
-        public HtmlEditControlConfiguration Configuration
-        {
-            get { return _configuration; }
-        }
-
         protected override void DestroyHandle()
         {
             if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
@@ -113,11 +107,9 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
             base.DestroyHandle();
         }
 
-        public void Configure(HtmlEditControlConfiguration configuration)
+        public override void Configure(HtmlEditControlConfiguration configuration)
         {
-            if (configuration == null) throw new ArgumentNullException(@"configuration");
-
-            _configuration = configuration;
+            base.Configure(configuration);
 
             _everLoadedTextModules = false; // Reset to force reload.
             updateUI();
@@ -512,10 +504,10 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
 
         private void checkGetTextModules()
         {
-            if (_configuration != null && _configuration.ExternalInformationProvider != null && !_everLoadedTextModules)
+            if (Configuration != null && Configuration.ExternalInformationProvider != null && !_everLoadedTextModules)
             {
                 _everLoadedTextModules = true;
-                _textModules = _configuration.ExternalInformationProvider.GetTextModules();
+                _textModules = Configuration.ExternalInformationProvider.GetTextModules();
             }
         }
 
@@ -543,14 +535,14 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
 
             if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
-                if (_configuration != null && _configuration.ExternalInformationProvider != null)
+                if (Configuration != null && Configuration.ExternalInformationProvider != null)
                 {
-                    var font = _configuration.ExternalInformationProvider.Font;
+                    var font = Configuration.ExternalInformationProvider.Font;
                     contextMenuStrip.Font = font ?? Font;
 
-                    if (_configuration.ExternalInformationProvider.ForeColor.HasValue)
+                    if (Configuration.ExternalInformationProvider.ForeColor.HasValue)
                     {
-                        contextMenuStrip.ForeColor = _configuration.ExternalInformationProvider.ForeColor.Value;
+                        contextMenuStrip.ForeColor = Configuration.ExternalInformationProvider.ForeColor.Value;
                     }
                 }
                 else
