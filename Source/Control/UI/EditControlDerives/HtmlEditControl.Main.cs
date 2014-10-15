@@ -44,7 +44,7 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
 
                 Navigate(@"about:blank");
 
-                _tmpFolderPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                _tmpFolderPath = Path.Combine(Path.GetTempPath(), @"zhe1-"+ Guid.NewGuid());
                 Directory.CreateDirectory(_tmpFolderPath);
 
                 _timerTextChange.Tick += timerTextChange_Tick;
@@ -83,7 +83,7 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
             }
         }
 
-        protected override void DestroyHandle()
+        protected override void OnHandleDestroyed(EventArgs e)
         {
             if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
@@ -104,7 +104,7 @@ namespace ZetaHtmlEditControl.UI.EditControlDerives
                 }
             }
 
-            base.DestroyHandle();
+            base.OnHandleDestroyed(e);
         }
 
         public override void Configure(HtmlEditControlConfiguration configuration)

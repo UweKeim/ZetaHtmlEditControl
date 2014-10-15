@@ -15,7 +15,7 @@ namespace ZetaHtmlEditControl.Code.Html
     {
         private readonly List<string> _cleanPaths = new List<string>();
 
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             endClean();
         }
@@ -37,7 +37,7 @@ namespace ZetaHtmlEditControl.Code.Html
                     saveFolderPath =
                         Path.Combine(
                             Path.GetTempPath(),
-                            Guid.NewGuid().ToString());
+                            @"zhe2-" + Guid.NewGuid(). ToString());
                     Directory.CreateDirectory(saveFolderPath);
 
                     if (!_cleanPaths.Contains(saveFolderPath))
@@ -184,7 +184,9 @@ namespace ZetaHtmlEditControl.Code.Html
             }
             else
             {
-                var folderUrlPath = PathHelper.ConvertFilePathToFileUrl(saveFolderPath).TrimEnd('/');
+                var folderUrlPath =
+                    (isHttpUrl(saveFolderPath) ? saveFolderPath : PathHelper.ConvertFilePathToFileUrl(saveFolderPath))
+                        .TrimEnd('/');
 
                 imagesFolderPathPlaceHolder = imagesFolderPathPlaceHolder.TrimEnd('/');
 
@@ -192,6 +194,12 @@ namespace ZetaHtmlEditControl.Code.Html
 
                 return html;
             }
+        }
+
+        private static bool isHttpUrl(string saveFolderPath)
+        {
+            return !string.IsNullOrEmpty(saveFolderPath) &&
+                   (saveFolderPath.StartsWith(@"http://") || saveFolderPath.StartsWith(@"https://"));
         }
 
         internal static ImageInfo[] FindImgs(

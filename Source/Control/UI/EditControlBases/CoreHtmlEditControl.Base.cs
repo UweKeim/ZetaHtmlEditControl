@@ -48,6 +48,16 @@
             constructCoreHtmlEditControlTextAndImage();
         }
 
+        protected override void OnHandleDestroyed(EventArgs e)
+        {
+            if (_htmlConversionHelper != null)
+            {
+                _htmlConversionHelper.Dispose();
+            }
+
+            base.OnHandleDestroyed(e);
+        }
+
         public bool IsDocumentLoaded { get; private set; }
 
         public IHTMLDocument2 DomDocument
