@@ -8,7 +8,7 @@ We do use this project inside several "real world" projects in our company, e.g.
 
 ## Quick usage
 
-- **[NuGet .NET 4.5.2 package](https://www.nuget.org/packages/ZetaHtmlEditControl)**
+- **[NuGet .NET 4.5.2 package](https://www.nuget.org/packages/ZetaHtmlEditControlReal)**
 
 ## Features
 
