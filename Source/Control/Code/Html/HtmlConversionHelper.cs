@@ -90,7 +90,7 @@ namespace ZetaHtmlEditControl.Code.Html
                         checkResizeImage(filePath, imageInfo.Width, imageInfo.Height);
 
                         //ersetzen
-                        var pattern = String.Format(
+                        var pattern = string.Format(
                             @"([""']){0}([""'])",
                             escapeRegularExpressionCharacters(imageInfo.Source));
 

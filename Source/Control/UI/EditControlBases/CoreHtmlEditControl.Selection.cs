@@ -1,5 +1,6 @@
 ﻿namespace ZetaHtmlEditControl.UI.EditControlBases
 {
+    using System;
     using System.Collections.Generic;
     using Code.PInvoke;
     using mshtml;
@@ -10,7 +11,7 @@
         {
             get
             {
-                if (DomDocument.all.length == 0)
+                if (!EverInitialized || DomDocument.all.length == 0)
                 {
                     return null;
                 }
@@ -31,20 +32,19 @@
             }
         }
 
-        protected bool IsTableCurrentSelectionInsideTable
-        {
-            get { return CurrentSelectionTable != null; }
-        }
+        protected bool IsTableCurrentSelectionInsideTable => CurrentSelectionTable != null;
 
         protected IHTMLTableRow CurrentSelectionTableRow
         {
             get
             {
+                if (!EverInitialized) return null;
+
                 if (CurrentSelectionTable == null)
                 {
                     return null;
                 }
-                    // A complete table.
+                // A complete table.
                 else if (IsTableSelection || IsControlSelection)
                 {
                     return null;
@@ -64,7 +64,7 @@
                     else
                     {
                         var rng = CurrentSelectionText;
-                        element = rng == null ? null : rng.parentElement();
+                        element = rng?.parentElement();
                     }
 
                     while (element != null)
@@ -93,11 +93,13 @@
         {
             get
             {
+                if (!EverInitialized) return null;
+
                 if (CurrentSelectionTable == null)
                 {
                     return null;
                 }
-                    // A complete table.
+                // A complete table.
                 else if (IsTableSelection || IsControlSelection)
                 {
                     return null;
@@ -117,7 +119,7 @@
                     else
                     {
                         var rng = CurrentSelectionText;
-                        element = rng == null ? null : rng.parentElement();
+                        element = rng?.parentElement();
                     }
 
                     while (element != null)
@@ -148,7 +150,7 @@
             {
                 var result = new List<IHTMLTableCell>();
 
-                if (CurrentSelectionTable != null)
+                if (EverInitialized && CurrentSelectionTable != null)
                 {
                     IMarkupPointer mp1;
                     IMarkupPointer mp2;
@@ -233,7 +235,7 @@
             get
             {
                 var row = CurrentSelectionTableRow;
-                return row == null ? -1 : row.rowIndex;
+                return row?.rowIndex ?? -1;
             }
         }
 
@@ -245,7 +247,7 @@
             get
             {
                 var cell = CurrentSelectionTableCell;
-                return cell == null ? -1 : cell.cellIndex;
+                return cell?.cellIndex ?? -1;
             }
         }
 
@@ -264,7 +266,7 @@
                 else
                 {
                     var rows = table.rows;
-                    return rows == null ? 0 : rows.length;
+                    return rows?.length ?? 0;
                 }
             }
         }
@@ -285,7 +287,7 @@
                 else
                 {
                     var cells = row.cells;
-                    return cells == null ? 0 : cells.length;
+                    return cells?.length ?? 0;
                 }
             }
         }
@@ -294,7 +296,7 @@
         {
             get
             {
-                if (DomDocument == null || DomDocument.all.length == 0)
+                if (!EverInitialized || DomDocument == null || DomDocument.all.length == 0)
                 {
                     return null;
                 }
@@ -312,20 +314,20 @@
 
         public IHTMLTxtRange CreateRangeOfWholeBody()
         {
-            var ms = (IMarkupServices)DomDocument;
+            var ms = (IMarkupServices) DomDocument;
             IMarkupPointer mpStart;
             ms.CreateMarkupPointer(out mpStart);
 
             IMarkupPointer mpEnd;
             ms.CreateMarkupPointer(out mpEnd);
 
-            var mpStart2 = (IMarkupPointer2)mpStart;
+            var mpStart2 = (IMarkupPointer2) mpStart;
             mpStart2.MoveToContent(DomDocument.body, NativeMethods.BOOL_TRUE);
 
-            var mpEnd2 = (IMarkupPointer2)mpEnd;
+            var mpEnd2 = (IMarkupPointer2) mpEnd;
             mpEnd2.MoveToContent(DomDocument.body, NativeMethods.BOOL_FALSE);
 
-            var range = (IHTMLTxtRange)DomDocument.selection.createRange();
+            var range = (IHTMLTxtRange) DomDocument.selection.createRange();
 
             ms.MoveRangeToPointers(mpStart2, mpEnd2, range);
             return range;
@@ -335,7 +337,7 @@
         {
             get
             {
-                if (DomDocument == null || DomDocument.all.length == 0)
+                if (!EverInitialized || DomDocument == null || DomDocument.all.length == 0)
                 {
                     return null;
                 }
@@ -355,8 +357,8 @@
         {
             get
             {
-                var selection = DomDocument.selection;
-                var st = selection.type.ToLowerInvariant();
+                var selection = EverInitialized ? DomDocument.selection : null;
+                var st = selection?.type.ToLowerInvariant();
 
                 return st == @"control";
             }
@@ -366,8 +368,8 @@
         {
             get
             {
-                var selection = DomDocument.selection;
-                var st = selection.type.ToLowerInvariant();
+                var selection = EverInitialized ? DomDocument.selection : null;
+                var st = selection?.type.ToLowerInvariant();
 
                 return st == @"text";
             }
@@ -377,8 +379,8 @@
         {
             get
             {
-                var selection = DomDocument.selection;
-                var st = selection.type.ToLowerInvariant();
+                var selection = EverInitialized ? DomDocument.selection : null;
+                var st = selection?.type.ToLowerInvariant();
 
                 return st == @"none";
             }
@@ -415,6 +417,8 @@
         {
             get
             {
+                if (!EverInitialized) return null;
+
                 // A complete table.
                 if (IsTableSelection)
                 {
@@ -423,7 +427,7 @@
 
                     return element as IHTMLTable2;
                 }
-                    // Inside a table (nested)?
+                // Inside a table (nested)?
                 else
                 {
                     IHTMLElement element;
@@ -436,7 +440,7 @@
                     else
                     {
                         var rng = CurrentSelectionText;
-                        element = rng == null ? null : rng.parentElement();
+                        element = rng?.parentElement();
                     }
 
                     while (element != null)
@@ -462,6 +466,8 @@
         public void InsertHtmlAtCurrentSelection(
             string html)
         {
+            if (!EverInitialized) return;
+
             if (IsControlSelection)
             {
                 // if its a control range, it must be deleted before.
@@ -470,11 +476,16 @@
             }
 
             var sel2 = CurrentSelectionText;
+
+            html = html.Replace(Environment.NewLine, string.Empty);
+
             sel2.pasteHTML(html);
         }
 
         public string SelectWord()
         {
+            if (!EverInitialized) return string.Empty;
+
             var range = CurrentSelectionText;
             range.moveStart(@"word", -1);
             range.moveEnd(@"word");
@@ -484,7 +495,7 @@
         protected void MoveCaretToElement(
             IHTMLElement element)
         {
-            if (element != null)
+            if (element != null && EverInitialized)
             {
                 var ms = (IMarkupServices) DomDocument;
                 IMarkupPointer mp;
@@ -516,6 +527,13 @@
             out IMarkupPointer selectionMPStart,
             out IMarkupPointer selectionMPEnd)
         {
+            if (!EverInitialized)
+            {
+                selectionMPStart = null;
+                selectionMPEnd = null;
+                return;
+            }
+
             // get markup container of the whole document.
             var mc = (IMarkupContainer) DomDocument;
 
@@ -585,20 +603,17 @@
                     // Strangly, range was null sometimes.
                     // E.g. when I resized a table (=control selection)
                     // and then did an undo.
-                    if (range != null)
+                    if (range?.length > 0)
                     {
-                        if (range.length > 0)
-                        {
-                            var start = range.item(0);
-                            var end = range.item(range.length - 1);
+                        var start = range.item(0);
+                        var end = range.item(range.length - 1);
 
-                            selectionMPStart.MoveAdjacentToElement(
-                                start,
-                                _ELEMENT_ADJACENCY.ELEM_ADJ_BeforeBegin);
-                            selectionMPEnd.MoveAdjacentToElement(
-                                end,
-                                _ELEMENT_ADJACENCY.ELEM_ADJ_AfterEnd);
-                        }
+                        selectionMPStart.MoveAdjacentToElement(
+                            start,
+                            _ELEMENT_ADJACENCY.ELEM_ADJ_BeforeBegin);
+                        selectionMPEnd.MoveAdjacentToElement(
+                            end,
+                            _ELEMENT_ADJACENCY.ELEM_ADJ_AfterEnd);
                     }
                 }
                     break;
@@ -614,6 +629,8 @@
         /// </remarks>
         public IHTMLElement GetElementAtCaret()
         {
+            if (!EverInitialized) return null;
+
             // Idee von http://stackoverflow.com/a/1911389/107625.
 
             var dom = DomDocument;

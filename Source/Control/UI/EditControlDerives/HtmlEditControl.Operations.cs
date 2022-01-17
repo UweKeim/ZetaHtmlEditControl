@@ -11,10 +11,7 @@
     {
         private void ExecuteSystemInfo()
         {
-            var msg =
-                string.Format(
-                    @"URL: {0}.",
-                    Url);
+            var msg = $@"URL: {Url}.";
 
             MessageBox.Show(
                 FindForm(),
@@ -26,6 +23,8 @@
 
         private void ExecuteSelectAll()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
@@ -35,6 +34,8 @@
 
         internal void ExecuteUnderline()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
@@ -44,16 +45,22 @@
 
         private void ExecuteRedo()
         {
-            if (Document != null) Document.ExecCommand(@"Redo", false, null);
+            if (!EverInitialized) return;
+
+            Document?.ExecCommand(@"Redo", false, null);
         }
 
         internal void ExecuteUndo()
         {
-            if (Document != null) Document.ExecCommand(@"Undo", false, null);
+            if (!EverInitialized) return;
+
+            Document?.ExecCommand(@"Undo", false, null);
         }
 
         public void ExecutePrintPreview()
         {
+            if (!EverInitialized) return;
+
             if (Document != null && Configuration.AllowPrint)
             {
                 OleCommandTargetExecute(NativeMethods.IdmPrintpreview, null);
@@ -62,6 +69,8 @@
 
         public void ExecutePrint()
         {
+            if (!EverInitialized) return;
+
             if (Document != null && Configuration.AllowPrint)
             {
                 OleCommandTargetExecute(NativeMethods.IdmPrint, null);
@@ -70,12 +79,11 @@
 
         internal void ExecuteBold()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
-                //var rr = FontName;
-                //var rr1 = FontSize;
-
                 doc.execCommand(@"Bold", false, null);
             }
         }
@@ -84,6 +92,8 @@
         //https://developer.mozilla.org/en/docs/Rich-Text_Editing_in_Mozilla
         internal void ExecuteFontSize(string newSize)
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
@@ -93,6 +103,8 @@
 
         internal void ExecuteFontName(string name)
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
@@ -102,6 +114,8 @@
 
         internal void ExecuteItalic()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc =
@@ -113,26 +127,32 @@
 
         internal void ExecutePaste()
         {
+            if (!EverInitialized) return;
+
             handlePaste(PasteMode.Normal);
         }
 
         internal void ExecutePasteAsText()
         {
+            if (!EverInitialized) return;
+
             handlePaste(PasteMode.Text);
         }
 
         internal void ExecutePasteFromWord()
         {
+            if (!EverInitialized) return;
+
             handlePaste(PasteMode.MsWord);
         }
 
         internal void ExecuteShowSource()
         {
+            if (!EverInitialized) return;
+
             using (var form = new HtmlSourceTextEditForm(DocumentText))
             {
-                form.ExternalInformationProvider = Configuration == null
-                    ? null
-                    : Configuration.ExternalInformationProvider;
+                form.ExternalInformationProvider = Configuration?.ExternalInformationProvider;
 
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
@@ -144,6 +164,8 @@
 
         internal void ExecuteInsertHyperlink()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
@@ -154,6 +176,8 @@
 
         internal void ExecuteIndent()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc =
@@ -165,6 +189,8 @@
 
         internal void ExecuteJustifyCenter()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc =
@@ -176,6 +202,8 @@
 
         internal void ExecuteJustifyLeft()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc =
@@ -187,10 +215,11 @@
 
         internal void ExecuteJustifyRight()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
-                var doc =
-                    (HTMLDocument) Document.DomDocument;
+                var doc = (HTMLDocument) Document.DomDocument;
 
                 doc.execCommand(@"JustifyRight", false, null);
             }
@@ -198,10 +227,11 @@
 
         internal void ExecuteNumberedList()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
-                var doc =
-                    (HTMLDocument) Document.DomDocument;
+                var doc = (HTMLDocument) Document.DomDocument;
 
                 doc.execCommand(@"InsertOrderedList", false, null);
             }
@@ -209,10 +239,11 @@
 
         internal void ExecuteOutdent()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
-                var doc =
-                    (HTMLDocument) Document.DomDocument;
+                var doc = (HTMLDocument) Document.DomDocument;
 
                 doc.execCommand(@"Outdent", false, null);
             }
@@ -220,6 +251,8 @@
 
         internal void ExecuteBullettedList()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
@@ -230,6 +263,8 @@
 
         internal void ExecuteCopy()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
@@ -240,25 +275,20 @@
 
         internal void ExecuteCut()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
 
                 doc.execCommand(@"Cut", false, null);
-                //if (IsTextSelection)
-                //{
-                //    var range = (IHTMLTxtRange) doc.selection.createRange();
-
-                //    Clipboard.SetText(range.htmlText);
-
-                //    // 2011-10-20, added.
-                //    ExecuteDelete();
-                //}
             }
         }
 
         internal void ExecuteDelete()
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
@@ -269,11 +299,11 @@
 
         public void ExecuteInsertTable()
         {
+            if (!EverInitialized) return;
+
             using (var form = new HtmlEditorTableNewForm())
             {
-                form.ExternalInformationProvider = Configuration == null
-                    ? null
-                    : Configuration.ExternalInformationProvider;
+                form.ExternalInformationProvider = Configuration?.ExternalInformationProvider;
 
                 if (form.ShowDialog(FindForm()) == DialogResult.OK)
                 {
@@ -284,6 +314,8 @@
 
         public void ExecuteInsertTableRow()
         {
+            if (!EverInitialized) return;
+
             var table = CurrentSelectionTable as IHTMLTable;
 
             if (table != null)
@@ -307,11 +339,15 @@
 
         internal void ExecuteSetBackColor05()
         {
+            if (!EverInitialized) return;
+
             setBackColor(@"ff00ff");
         }
 
         public void ExecuteInsertTableColumn()
         {
+            if (!EverInitialized) return;
+
             var table = CurrentSelectionTable as IHTMLTable;
 
             if (table != null)
@@ -327,6 +363,8 @@
 
         public void ExecuteTableAddTableRow()
         {
+            if (!EverInitialized) return;
+
             var table = CurrentSelectionTable as IHTMLTable;
 
             if (table != null)
@@ -339,27 +377,27 @@
 
         public void ExecuteTableAddTableColumn()
         {
+            if (!EverInitialized) return;
+
             var table = CurrentSelectionTable as IHTMLTable;
 
             if (table != null)
             {
-                HtmlEditorTableNewForm.AddTableColumnsAtRight(
-                    table,
-                    1);
+                HtmlEditorTableNewForm.AddTableColumnsAtRight(table, 1);
             }
         }
 
         public void ExecuteTableProperties()
         {
+            if (!EverInitialized) return;
+
             var table = CurrentSelectionTable as IHTMLTable;
 
             if (table != null)
             {
                 using (var form = new HtmlEditorTableNewForm())
                 {
-                    form.ExternalInformationProvider = Configuration == null
-                        ? null
-                        : Configuration.ExternalInformationProvider;
+                    form.ExternalInformationProvider = Configuration?.ExternalInformationProvider;
 
                     form.Table = table;
                     form.ShowDialog(FindForm());
@@ -369,6 +407,8 @@
 
         public void ExecuteTableDeleteRow()
         {
+            if (!EverInitialized) return;
+
             var table = CurrentSelectionTable as IHTMLTable;
             var rowIndex = CurrentSelectionTableRowIndex;
 
@@ -380,6 +420,8 @@
 
         public void ExecuteTableDeleteColumn()
         {
+            if (!EverInitialized) return;
+
             var table = CurrentSelectionTable as IHTMLTable;
             var columnIndex = CurrentSelectionTableColumnIndex;
 
@@ -392,10 +434,7 @@
                     for (var i = 0; i < rows.length; ++i)
                     {
                         var row = rows.item(i, i) as IHTMLTableRow;
-                        if (row != null)
-                        {
-                            row.deleteCell(columnIndex);
-                        }
+                        row?.deleteCell(columnIndex);
                     }
                 }
             }
@@ -403,21 +442,17 @@
 
         public void ExecuteTableDeleteTable()
         {
+            if (!EverInitialized) return;
+
             var table = CurrentSelectionTable as IHTMLTable;
-
-            if (table != null)
-            {
-                var tableNode = table as IHTMLDOMNode;
-
-                if (tableNode != null)
-                {
-                    tableNode.removeNode(true);
-                }
-            }
+            var tableNode = table as IHTMLDOMNode;
+            tableNode?.removeNode(true);
         }
 
         public void ExecuteTableRowProperties()
         {
+            if (!EverInitialized) return;
+
             var row = CurrentSelectionTableRow;
 
             if (row != null)
@@ -436,6 +471,8 @@
 
         public void ExecuteTableColumnProperties()
         {
+            if (!EverInitialized) return;
+
             var table = CurrentSelectionTable as IHTMLTable;
             var columnIndex = CurrentSelectionTableColumnIndex;
 
@@ -443,9 +480,7 @@
             {
                 using (var form = new HtmlEditorCellPropertiesForm())
                 {
-                    form.ExternalInformationProvider = Configuration == null
-                        ? null
-                        : Configuration.ExternalInformationProvider;
+                    form.ExternalInformationProvider = Configuration?.ExternalInformationProvider;
 
                     form.Initialize(table, columnIndex);
                     form.ShowDialog(FindForm());
@@ -455,15 +490,15 @@
 
         public void ExecuteTableCellProperties()
         {
+            if (!EverInitialized) return;
+
             var cells = CurrentSelectionTableCells;
 
             if (cells != null && cells.Length > 0)
             {
                 using (var form = new HtmlEditorCellPropertiesForm())
                 {
-                    form.ExternalInformationProvider = Configuration == null
-                        ? null
-                        : Configuration.ExternalInformationProvider;
+                    form.ExternalInformationProvider = Configuration?.ExternalInformationProvider;
 
                     form.Initialize(cells);
                     form.ShowDialog(FindForm());
@@ -473,102 +508,138 @@
 
         internal void ExecuteSetForeColorNone()
         {
+            if (!EverInitialized) return;
+
             setForeColor(MsHtmlLegacyFromBadToGoodTranslator.NoForegroundColor);
         }
 
         internal void ExecuteSetForeColor01()
         {
+            if (!EverInitialized) return;
+
             setForeColor(@"c00000");
         }
 
         internal void ExecuteSetForeColor02()
         {
+            if (!EverInitialized) return;
+
             setForeColor(@"ff0000");
         }
 
         internal void ExecuteSetForeColor03()
         {
+            if (!EverInitialized) return;
+
             setForeColor(@"ffc000");
         }
 
         internal void ExecuteSetForeColor04()
         {
+            if (!EverInitialized) return;
+
             setForeColor(@"ffff00");
         }
 
         internal void ExecuteSetBackColorNone()
         {
+            if (!EverInitialized) return;
+
             setBackColor(MsHtmlLegacyFromBadToGoodTranslator.NoBackgroundColor);
         }
 
         internal void ExecuteSetBackColor02()
         {
+            if (!EverInitialized) return;
+
             setBackColor(@"00ff00");
         }
 
         internal void ExecuteSetBackColor03()
         {
+            if (!EverInitialized) return;
+
             setBackColor(@"00ffff");
         }
 
         internal void ExecuteSetBackColor04()
         {
+            if (!EverInitialized) return;
+
             setBackColor(@"ff0000");
         }
 
         internal void ExecuteSetForeColor05()
         {
+            if (!EverInitialized) return;
+
             setForeColor(@"92d050");
         }
 
         internal void ExecuteSetForeColor06()
         {
+            if (!EverInitialized) return;
+
             setForeColor(@"00b050");
         }
 
         internal void ExecuteSetForeColor07()
         {
+            if (!EverInitialized) return;
+
             setForeColor(@"00b0f0");
         }
 
         internal void ExecuteSetForeColor08()
         {
+            if (!EverInitialized) return;
+
             setForeColor(@"0070c0");
         }
 
         internal void ExecuteSetForeColor09()
         {
+            if (!EverInitialized) return;
+
             setForeColor(@"002060");
         }
 
         internal void ExecuteSetForeColor10()
         {
+            if (!EverInitialized) return;
+
             setForeColor(@"7030a0");
         }
 
         internal void ExecuteSetBackColor01()
         {
+            if (!EverInitialized) return;
+
             setBackColor(@"ffff00");
         }
 
         private void setForeColor(
             string color)
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
 
-                doc.execCommand(@"ForeColor", false, color);
+                doc.execCommand(@"ForeColor", false, @"#" + color.Trim('#'));
             }
         }
 
         private void setBackColor(
             string color)
         {
+            if (!EverInitialized) return;
+
             if (Document != null)
             {
                 var doc = (HTMLDocument) Document.DomDocument;
-                doc.execCommand(@"BackColor", false, color);
+                doc.execCommand(@"BackColor", false, @"#" + color.Trim('#'));
             }
         }
 
@@ -577,13 +648,12 @@
         /// </summary>
         internal void ExecuteRemoveFormatting()
         {
+            if (!EverInitialized) return;
+
             if (IsTextSelection)
             {
                 var sel = CurrentSelectionText;
-                if (sel != null)
-                {
-                    sel.execCommand(@"removeFormat", false, null);
-                }
+                sel?.execCommand(@"removeFormat", false, null);
             }
             else if (IsNoneSelection)
             {

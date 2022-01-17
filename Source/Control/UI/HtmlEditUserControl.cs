@@ -14,9 +14,13 @@ namespace ZetaHtmlEditControl.UI
     using Code.Configuration;
     using EditControlDerives;
 
+    // 2015-11-02, Uwe Keim:
+    //
+    // Mehrfach den Fokus zwischen den einzelnen HTML-Editoren ändern,
+    // lässt den Fehler verschwinden, dass mehrere Carets gleichzeitig blinken.
     public partial class HtmlEditUserControl : UserControl
     {
-        private const string DefaultFontValue = "---";
+        private const string DefaultFontValue = @"---";
         private readonly float _initialTopHeight;
         private bool _textModulesFilled;
         private int _updateCount;
@@ -35,7 +39,7 @@ namespace ZetaHtmlEditControl.UI
                     fontNameToolStripComboBox.Items.Add(family.Name);
                 }
 
-                fontSizeToolStripComboBox.Items.AddRange(new object[] { DefaultFontValue, "1", "2", "3", "4", "5", "6", "7" });
+                fontSizeToolStripComboBox.Items.AddRange(new object[] { DefaultFontValue, @"1", @"2", @"3", @"4", @"5", @"6", @"7" });
 
                 fontNameToolStripComboBox.SelectedIndex =
                     fontSizeToolStripComboBox.SelectedIndex = 0;
@@ -46,19 +50,23 @@ namespace ZetaHtmlEditControl.UI
 
                 _initialTopHeight = tableLayoutPanel.RowStyles[0].Height;
 
+                htmlEditControl.DidEverInitialize += htmlEditControl_DidEverInitialize;
                 htmlEditControl.UINeedsUpdate += htmlEditControl_UINeedsUpdate;
 
                 Configure(htmlEditControl.Configuration);
             }
         }
 
+        private void htmlEditControl_DidEverInitialize(object sender, EventArgs e)
+        {
+            if (!htmlEditControl.EverInitialized) return;
+            applyFont();
+        }
+
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public ToolStrip ToolStrip
-        {
-            get { return topToolStrip; }
-        }
+        public ToolStrip ToolStrip => topToolStrip;
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -68,10 +76,7 @@ namespace ZetaHtmlEditControl.UI
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public HtmlEditControl HtmlEditControl
-        {
-            get { return htmlEditControl; }
-        }
+        public HtmlEditControl HtmlEditControl => htmlEditControl;
 
         public bool IsToolbarVisible
         {
@@ -93,7 +98,7 @@ namespace ZetaHtmlEditControl.UI
 
         void fontNameToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (htmlEditControl.Configuration.AllowFontChange)
+            if (htmlEditControl.EverInitialized && htmlEditControl.Configuration.AllowFontChange)
             {
                 var name = (string)fontNameToolStripComboBox.SelectedItem;
                 if (!string.IsNullOrEmpty(name) && name != DefaultFontValue)
@@ -105,7 +110,7 @@ namespace ZetaHtmlEditControl.UI
 
         void fontSizeToolStripComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (htmlEditControl.Configuration.AllowFontChange)
+            if (htmlEditControl.EverInitialized && htmlEditControl.Configuration.AllowFontChange)
             {
                 var size = (string)fontSizeToolStripComboBox.SelectedItem;
                 if (!string.IsNullOrEmpty(size) && size != DefaultFontValue)
@@ -129,12 +134,6 @@ namespace ZetaHtmlEditControl.UI
                 htmlEditControl.Configuration.AllowFontChange;
         }
 
-        protected override void OnHandleCreated(EventArgs e)
-        {
-            base.OnHandleCreated(e);
-            applyFont();
-        }
-
         private void htmlEditControl_UINeedsUpdate(
             object sender,
             EventArgs e)
@@ -144,10 +143,9 @@ namespace ZetaHtmlEditControl.UI
 
         private void applyFont()
         {
-            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
+            if (htmlEditControl.EverInitialized && !DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
-                if (htmlEditControl.Configuration != null &&
-                htmlEditControl.Configuration.ExternalInformationProvider != null)
+                if (htmlEditControl.Configuration?.ExternalInformationProvider != null)
                 {
                     var font = htmlEditControl.Configuration.ExternalInformationProvider.Font;
                     if (font != null)
@@ -172,7 +170,7 @@ namespace ZetaHtmlEditControl.UI
 
         private void updateButtons()
         {
-            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
+            if (htmlEditControl.EverInitialized && !DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
             {
                 fontNameToolStripComboBox.Enabled =
                     fontSizeToolStripComboBox.Enabled = htmlEditControl.CanChangeFont;
@@ -234,121 +232,145 @@ namespace ZetaHtmlEditControl.UI
 
         private void boldToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteBold();
         }
 
         private void italicToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteItalic();
         }
 
         private void bullettedListToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteBullettedList();
         }
 
         private void numberedListToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteNumberedList();
         }
 
         private void indentToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteIndent();
         }
 
         private void outdentToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteOutdent();
         }
 
         private void insertTableToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteInsertTable();
         }
 
         private void foreColorNoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColorNone();
         }
 
         private void foreColor01ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColor01();
         }
 
         private void foreColor02ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColor02();
         }
 
         private void foreColor03ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColor03();
         }
 
         private void foreColor04ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColor04();
         }
 
         private void foreColor05ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColor05();
         }
 
         private void foreColor06ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColor06();
         }
 
         private void foreColor07ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColor07();
         }
 
         private void foreColor08ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColor08();
         }
 
         private void foreColor09ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColor09();
         }
 
         private void foreColor10ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetForeColor10();
         }
 
         private void BackColorNoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetBackColorNone();
         }
 
         private void BackColor01ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetBackColor01();
         }
 
         private void BackColor02ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetBackColor02();
         }
 
         private void BackColor03ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetBackColor03();
         }
 
         private void BackColor04ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetBackColor04();
         }
 
         private void BackColor05ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteSetBackColor05();
         }
 
@@ -359,31 +381,37 @@ namespace ZetaHtmlEditControl.UI
 
         private void justifyLeftToolStripButton_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteJustifyLeft();
         }
 
         private void justifyCenterToolStripButton_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteJustifyCenter();
         }
 
         private void justifyRightToolStripButton_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteJustifyRight();
         }
 
         private void undoToolStripButton_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteUndo();
         }
 
         private void underlineToolStripButton_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteUnderline();
         }
 
         private void textModulesToolStripItem_DropDownOpening(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             if (!_textModulesFilled)
             {
                 _textModulesFilled = true;
@@ -393,6 +421,7 @@ namespace ZetaHtmlEditControl.UI
 
         private void removeFormattingToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!htmlEditControl.EverInitialized) return;
             htmlEditControl.ExecuteRemoveFormatting();
         }
     }

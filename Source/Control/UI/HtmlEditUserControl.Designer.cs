@@ -416,9 +416,7 @@
             // 
             // htmlEditControl
             // 
-            this.htmlEditControl.AllowWebBrowserDrop = false;
             resources.ApplyResources(this.htmlEditControl, "htmlEditControl");
-            this.htmlEditControl.IsWebBrowserContextMenuEnabled = false;
             this.htmlEditControl.Name = "htmlEditControl";
             // 
             // HtmlEditUserControl

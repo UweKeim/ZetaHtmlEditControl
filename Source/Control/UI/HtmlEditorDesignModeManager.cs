@@ -12,13 +12,7 @@
     /// </summary>
     public static class HtmlEditorDesignModeManager 
     {
-        private static bool _isDesignMode = true;
-
-        public static bool IsDesignMode
-        {
-            get { return _isDesignMode; }
-            set { _isDesignMode = value; }
-        }
+        public static bool IsDesignMode { get; set; } = true;
 
         //public HtmlEditorDesignModeManager()
         //{

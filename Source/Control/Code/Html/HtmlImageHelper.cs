@@ -2,10 +2,7 @@
 {
     public static class HtmlImageHelper
     {
-        public static string ImagesFolderPathPlaceHolder
-        {
-            get { return @"http://pseudo-image-folder-path"; }
-        }
+        public static string ImagesFolderPathPlaceHolder => @"http://pseudo-image-folder-path";
 
         /// <summary>
         /// Stand-alone function to expand any placeholders inside

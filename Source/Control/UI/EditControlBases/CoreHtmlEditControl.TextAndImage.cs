@@ -4,6 +4,7 @@
     using System.ComponentModel;
     using System.Drawing;
     using System.Text.RegularExpressions;
+    using Code.Configuration;
     using Code.Html;
     using Code.MsHtml;
     using Properties;
@@ -13,7 +14,17 @@
         private const string CssFontStyle =
             @"font-family: Segoe UI, Tahoma, Verdana, Arial; font-size: {font-size}; ";
 
-        private static string _defaultCssText = @"body { {font-style}; margin: 4px; {color}; }
+        private string _cssFontSize;
+
+        private string _cssText = DefaultCssText;
+        private HtmlConversionHelper _htmlConversionHelper;
+        private string _htmlTemplate = DefaultHtmlTemplate;
+
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public static string DefaultCssText { get; set; } =
+            @"body { {font-style}; margin: 4px; {color}; }
 			li { margin-bottom: 5pt; }
 			table {
 				border-width: 1px;
@@ -30,39 +41,42 @@
 				padding: 0;
 			}";
 
-        private static string _defaultHtmlTemplate =
-            @"<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"">
-			<html xmlns=""http://www.w3.org/1999/xhtml"">
+        [Browsable(false)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public static string DefaultHtmlTemplate { get; set; } =
+            $@"<!DOCTYPE {InternalEditingConfiguration.DocType}>
+			<html style=""height:100%"">
 				<head>
+                    <meta http-equiv=""X-UA-Compatible"" content=""IE={InternalEditingConfiguration.IEVersion}"" />
 					<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8"" />
 					<style type=""text/css"">##CSS##</style>
+					<style type=""text/css"">
+                        html,body {{ height:100%; }} 
+                        #editor {{ height: 100%; }}
+                    </style>
+                    <script type=""text/javascript"">
+                        var checkLoad = function() {{   
+                            if(document.readyState !== ""complete"" ) {{
+                                setTimeout(checkLoad, 11);
+                            }} else {{
+                                turnOnDesignMode();
+                            }}
+                        }};  
+
+                        checkLoad(); 
+
+                        function turnOnDesignMode() {{
+                            try {{
+                                try {{ window.external.NotifyDocumentReady(); }} catch ( err ) {{}}
+                                document.designMode = ""on"";
+                                document.body.hideFocus = true;
+                            }} catch ( err2 ) {{ }}
+                        }}
+                    </script>
 				</head>
 				<body spellcheck=""true"">##BODY##</body>
 			</html>";
-
-        private string _cssFontSize;
-
-        private string _cssText = _defaultCssText;
-        private HtmlConversionHelper _htmlConversionHelper;
-        private string _htmlTemplate = _defaultHtmlTemplate;
-
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public static string DefaultCssText
-        {
-            get { return _defaultCssText; }
-            set { _defaultCssText = value; }
-        }
-
-        [Browsable(false)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public static string DefaultHtmlTemplate
-        {
-            get { return _defaultHtmlTemplate; }
-            set { _defaultHtmlTemplate = value; }
-        }
 
         /// <summary>
         /// Assigns a style sheet to the HTML editor.
@@ -92,14 +106,14 @@
                 if (string.IsNullOrEmpty(value))
                 {
                     throw new ArgumentNullException(
-                        @"value",
+                        nameof(value),
                         Resources.SR_HtmlEditControl_HtmlTemplate_AvaluefortheHtmlTemplatemustbeprovided);
                 }
                 else if (!value.Contains(@"##BODY##"))
                 {
                     throw new ArgumentException(
                         Resources.SR_HtmlEditControl_HtmlTemplate_MissingBODYinsidetheHtmlTemplatepropertyvalue,
-                        @"value");
+                        nameof(value));
                 }
                 else
                 {
@@ -134,17 +148,14 @@
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new string DocumentText
         {
-            get { return prepareDocumentTextGet(MsHtmlLegacyFromBadToGoodTranslator.Translate(base.DocumentText)); }
+            get { return PrepareDocumentTextGet(MsHtmlLegacyFromBadToGoodTranslator.Translate(base.DocumentText)); }
             set { base.DocumentText = prepareDocumentTextSet(MsHtmlLegacyFromGoodToBadTranslator.Translate(value)); }
         }
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string TextOnlyFromDocumentBody
-        {
-            get { return base.DocumentText.GetBodyFromHtmlCode().GetOnlyTextFromHtmlCode(); }
-        }
+        public string TextOnlyFromDocumentBody => base.DocumentText.GetBodyFromHtmlCode().GetOnlyTextFromHtmlCode();
 
         [Browsable(false)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -160,7 +171,7 @@
             get
             {
                 var color = ForeColor;
-                return string.Format(@"#{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B);
+                return $@"#{color.R:X2}{color.G:X2}{color.B:X2}";
             }
         }
 
@@ -174,19 +185,13 @@
         public string MakeFullHtmlFromBody(
             string body)
         {
-            return doBuildCompleteHtml(body, _defaultHtmlTemplate, _defaultCssText);
-        }
-
-        public void SetDocumentText(
-            string text)
-        {
-            SetDocumentText(text, null, false);
+            return doBuildCompleteHtml(body, DefaultHtmlTemplate, DefaultCssText);
         }
 
         public void SetDocumentText(
             string text,
-            string externalImagesFolderPath,
-            bool useImagesFolderPathPlaceHolder)
+            string externalImagesFolderPath = null,
+            bool useImagesFolderPathPlaceHolder = false)
         {
             DocumentText =
                 _htmlConversionHelper.ConvertSetHtml(
@@ -195,25 +200,14 @@
                     useImagesFolderPathPlaceHolder ? HtmlImageHelper.ImagesFolderPathPlaceHolder : null);
         }
 
-        /// <summary>
-        /// Gets the document text and stores images to the given folder.
-        /// </summary>
-        /// <param name="externalImagesFolderPath">Folder path to store the images.</param>
-        /// <returns>Returns the HTML code of the body.</returns>
-        public string GetDocumentText(
-            string externalImagesFolderPath)
-        {
-            return GetDocumentText(externalImagesFolderPath, false);
-        }
-
         public string GetDocumentText(
             string externalImagesFolderPath,
-            bool useImagesFolderPathPlaceHolder)
+            bool useImagesFolderPathPlaceHolder = false)
         {
             var result =
                 _htmlConversionHelper.ConvertGetHtml(
                     DocumentText,
-                    Document == null ? null : Document.Url,
+                    EverInitialized ? Document?.Url : null,
                     externalImagesFolderPath,
                     useImagesFolderPathPlaceHolder ? HtmlImageHelper.ImagesFolderPathPlaceHolder : null);
 
@@ -261,7 +255,7 @@
 
             if (!string.IsNullOrEmpty(cssText) && cssText.Contains(@"{color}"))
             {
-                cssText = cssText.Replace(@"{color}", string.Format(@"color: {0}", CssColor));
+                cssText = cssText.Replace(@"{color}", $@"color: {CssColor}");
             }
 
             return cssText;
@@ -281,65 +275,20 @@
                 case GraphicsUnit.Inch:
                 case GraphicsUnit.Document:
                 case GraphicsUnit.Millimeter:
-                    return string.Format(@"{0}pt", font.SizeInPoints);
+                    return $@"{font.SizeInPoints}pt";
                 case GraphicsUnit.Pixel:
-                    return string.Format(@"{0}px", font.Size);
+                    return $@"{font.Size}px";
                 case GraphicsUnit.Point:
-                    return string.Format(@"{0}pt", font.Size);
+                    return $@"{font.Size}pt";
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
 
-        /*
-                private float getFontScaleFactor()
-                {
-                    var myFont = Font;
-                    var sysFont = SystemFonts.DialogFont;
-
-                    var sizeInPixel1 = getSizeInPixel(myFont);
-                    var sizeInPixel2 = getSizeInPixel(sysFont);
-
-                    var factor = sizeInPixel1 / sizeInPixel2;
-                    return factor;
-                }
-        */
-
-        /*
-                private float getSizeInPixel(Font f)
-                {
-                    if (f.Unit == GraphicsUnit.Pixel)
-                    {
-                        return f.Size;
-                    }
-                    else
-                    {
-                        var dpi = getDpi();
-                        return f.SizeInPoints / 72 * dpi;
-                    }
-                }
-        */
-
-        /*
-                private float _dpi;
-        */
-        /*
-                private float getDpi()
-                {
-                    if (_dpi <= 0)
-                    {
-                        using (var gfx = CreateGraphics())
-                        {
-                            _dpi = gfx.DpiY;
-                        }
-                    }
-
-                    return _dpi;
-                }
-        */
-
-        private string prepareDocumentTextGet(string html)
+        protected override string PrepareDocumentTextGet(string html)
         {
+            if (string.IsNullOrEmpty(html)) return string.Empty;
+
             var result = html.GetBodyFromHtmlCode();
             result = Regex.Replace(result, @"<![^>]*>", string.Empty, RegexOptions.Singleline);
 
@@ -356,7 +305,7 @@
 
             if (_htmlConversionHelper != null)
             {
-                ((IDisposable)_htmlConversionHelper).Dispose();
+                _htmlConversionHelper.Dispose();
                 _htmlConversionHelper = null;
             }
         }

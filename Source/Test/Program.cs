@@ -23,7 +23,12 @@ namespace Test
 
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new TestFormForScreenshots());
+
+                //Application.Run(new TestForm());
+                Application.Run(new LaunchForm());
+                //Application.Run(new TestFormForScreenshots4());
+                //Application.Run(new TestFormForScreenshots2());
+                //Application.Run(new TestFormForScreenshots4());
             }
             catch (Exception e)
             {

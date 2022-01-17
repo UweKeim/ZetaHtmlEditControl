@@ -13,7 +13,7 @@
         private void handlePaste(
             PasteMode pasteMode)
         {
-            if (Document != null)
+            if (EverInitialized && Document != null)
             {
                 var doc = (HTMLDocument)Document.DomDocument;
 
@@ -31,10 +31,7 @@
                 {
                     var image = Clipboard.GetImage();
                     var file = Path.Combine(_tmpFolderPath, _objectID.ToString(CultureInfo.InvariantCulture));
-                    if (image != null)
-                    {
-                        image.Save(file, image.RawFormat);
-                    }
+                    image?.Save(file, image.RawFormat);
 
                     _objectID++;
 
@@ -44,11 +41,11 @@
                         var imageContent = Convert.ToBase64String(data, 0, data.Length);
                         File.Delete(file);
 
-                        html = string.Format(@"<img src=""data:image;base64,{0}"" />", imageContent);
+                        html = $@"<img src=""data:image;base64,{imageContent}"" />";
                     }
                     else
                     {
-                        html = string.Format(@"<img src=""{0}"" id=""Img{1}"" />", file, DateTime.Now.Ticks);
+                        html = $@"<img src=""{file}"" id=""Img{DateTime.Now.Ticks}"" />";
                     }
                 }
                 else

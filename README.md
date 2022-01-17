@@ -1,10 +1,14 @@
 # Zeta HTML Edit Control
 
-This project presents you a small wrapper class around the Windows Forms 2.0 [`WebBrowser` control](http://msdn.microsoft.com/en-us/library/2te2y1x6.aspx) control.
+This project presents you a small wrapper class around the Windows Forms 2.0 [`WebBrowser` control](https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/webbrowser-control-windows-forms) control.
 
-![Screenshot of Zeta Html Edit Control](http://i.imgur.com/5medndw.png)
+![Screenshot of Zeta Html Edit Control](https://i.imgur.com/5medndw.png)
 
-We do use this project inside several "real world" projects in our company, e.g. a [Test Management tool](http://www.zeta-test.com) and a Windows-based [Content Management System (CMS)](http://www.zeta-producer.com/de/cms.html).
+We do use this project inside several "real world" projects in our company, e.g. a [Test Management tool](https://www.zeta-test.com) and a Windows-based [Content Management System (CMS)](https://www.zeta-producer.com/de/index.html).
+
+## Quick usage
+
+- **[NuGet .NET 4.5.2 package](https://www.nuget.org/packages/ZetaHtmlEditControl)**
 
 ## Features
 
@@ -50,11 +54,4 @@ You need to have the `<NetFx40_LegacySecurityPolicy enabled="true" />` switch in
       </runtime>
     </configuration>
 
-A more [detailed article](http://www.codeproject.com/Articles/43954/ZetaplusHTMLplusEditplusControl) is available [over on The Code Project](http://www.codeproject.com/Articles/43954/ZetaplusHTMLplusEditplusControl).
-
-## History
-
-  * *2013-11-12* - Added functions to paste text from Microsoft Word and clean that up.
-  * *2013-11-05* - Foreground and background colors with CSS.
-  * *2013-08-10* - Added app.config switch for .NET 4.
-  * *2013-05-30* - First public release to Github.
+A more [detailed article](https://www.codeproject.com/Articles/43954/ZetaplusHTMLplusEditplusControl) is available [over on The Code Project](https://www.codeproject.com/Articles/43954/ZetaplusHTMLplusEditplusControl).

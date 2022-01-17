@@ -30,22 +30,23 @@ namespace Test
 		/// </summary>
 		private void InitializeComponent()
 		{
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestFormForScreenshots));
             this.ToolbarVisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.htmlEditUserControl1 = new ZetaHtmlEditControl.UI.HtmlEditUserControl();
             this.infoTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.htmlEditUserControl2 = new ZetaHtmlEditControl.UI.HtmlEditUserControl();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // ToolbarVisibleCheckBox
             // 
             this.ToolbarVisibleCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ToolbarVisibleCheckBox.AutoSize = true;
-            this.ToolbarVisibleCheckBox.Checked = true;
-            this.ToolbarVisibleCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ToolbarVisibleCheckBox.Location = new System.Drawing.Point(12, 650);
             this.ToolbarVisibleCheckBox.Name = "ToolbarVisibleCheckBox";
-            this.ToolbarVisibleCheckBox.Size = new System.Drawing.Size(113, 21);
+            this.ToolbarVisibleCheckBox.Size = new System.Drawing.Size(112, 21);
             this.ToolbarVisibleCheckBox.TabIndex = 2;
             this.ToolbarVisibleCheckBox.Text = "Toolbar visible";
             this.ToolbarVisibleCheckBox.UseVisualStyleBackColor = true;
@@ -59,7 +60,7 @@ namespace Test
             this.htmlEditUserControl1.IsToolbarVisible = false;
             this.htmlEditUserControl1.Location = new System.Drawing.Point(12, 12);
             this.htmlEditUserControl1.Name = "htmlEditUserControl1";
-            this.htmlEditUserControl1.Size = new System.Drawing.Size(630, 601);
+            this.htmlEditUserControl1.Size = new System.Drawing.Size(630, 297);
             this.htmlEditUserControl1.TabIndex = 0;
             // 
             // infoTextBox
@@ -83,6 +84,22 @@ namespace Test
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // htmlEditUserControl2
+            // 
+            this.htmlEditUserControl2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.htmlEditUserControl2.IsToolbarVisible = false;
+            this.htmlEditUserControl2.Location = new System.Drawing.Point(12, 315);
+            this.htmlEditUserControl2.Name = "htmlEditUserControl2";
+            this.htmlEditUserControl2.Size = new System.Drawing.Size(630, 298);
+            this.htmlEditUserControl2.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // TestFormForScreenshots
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -90,6 +107,7 @@ namespace Test
             this.Controls.Add(this.button1);
             this.Controls.Add(this.infoTextBox);
             this.Controls.Add(this.ToolbarVisibleCheckBox);
+            this.Controls.Add(this.htmlEditUserControl2);
             this.Controls.Add(this.htmlEditUserControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -111,6 +129,8 @@ namespace Test
         private System.Windows.Forms.CheckBox ToolbarVisibleCheckBox;
         private System.Windows.Forms.TextBox infoTextBox;
         private System.Windows.Forms.Button button1;
-	}
+        private HtmlEditUserControl htmlEditUserControl2;
+        private System.Windows.Forms.Timer timer1;
+    }
 }
 

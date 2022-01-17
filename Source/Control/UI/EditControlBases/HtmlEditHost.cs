@@ -27,7 +27,7 @@ namespace ZetaHtmlEditControl.UI.EditControlBases
             var img = pIElement as IHTMLImgElement;
             if (img != null)
             {
-                var key = String.Format(@"{0}-{1}", pIElement.id, img.src);
+                var key = $@"{pIElement.id}-{img.src}";
 
                 if (!_initialImgSizes.ContainsKey(key))
                 {
@@ -41,20 +41,20 @@ namespace ZetaHtmlEditControl.UI.EditControlBases
                     case _ELEMENT_CORNER.ELEMENT_CORNER_RIGHT:
                     case _ELEMENT_CORNER.ELEMENT_CORNER_LEFT:
                     {
-                        var fac = initialSize.Height / (float)initialSize.Width;
+                        var fac = initialSize.Height/(float) initialSize.Width;
 
                         var newWidth = prcNew.right - prcNew.left;
-                        var newHeight = fac * newWidth;
+                        var newHeight = fac*newWidth;
 
                         // Niemals > 100%.
                         newWidth = Math.Min(newWidth, initialSize.Width);
                         newHeight = Math.Min(newHeight, initialSize.Height);
 
                         prcNew.right = prcNew.left + newWidth;
-                        prcNew.bottom = (int)(prcNew.top + newHeight);
+                        prcNew.bottom = (int) (prcNew.top + newHeight);
 
                         img.width = newWidth;
-                        img.height = (int)newHeight;
+                        img.height = (int) newHeight;
                     }
                         break;
 
@@ -65,24 +65,24 @@ namespace ZetaHtmlEditControl.UI.EditControlBases
                     case _ELEMENT_CORNER.ELEMENT_CORNER_TOPLEFT:
                     case _ELEMENT_CORNER.ELEMENT_CORNER_TOPRIGHT:
                     {
-                        var fac = initialSize.Width / (float)initialSize.Height;
+                        var fac = initialSize.Width/(float) initialSize.Height;
 
                         var newHeight = prcNew.bottom - prcNew.top;
-                        var newWidth = fac * newHeight;
+                        var newWidth = fac*newHeight;
 
                         // Niemals > 100%.
                         newWidth = Math.Min(newWidth, initialSize.Width);
                         newHeight = Math.Min(newHeight, initialSize.Height);
 
-                        prcNew.right = (int)(prcNew.left + newWidth);
+                        prcNew.right = (int) (prcNew.left + newWidth);
                         prcNew.bottom = prcNew.top + newHeight;
 
-                        img.width = (int)newWidth;
+                        img.width = (int) newWidth;
                         img.height = newHeight;
                     }
                         break;
 
-                        // TODO
+                    // TODO
                 }
             }
         }

@@ -10,13 +10,13 @@
         public override bool PreProcessMessage(
             ref Message msg)
         {
-            if (!DesignMode && !HtmlEditorDesignModeManager.IsDesignMode)
+            if ( !DesignMode && !HtmlEditorDesignModeManager.IsDesignMode && EverInitialized)
             {
                 if (msg.Msg == NativeMethods.WmKeydown || msg.Msg == NativeMethods.WmSyskeydown)
                 {
                     var isShift = (ModifierKeys & Keys.Shift) != 0;
 
-                    var key = ((Keys)((int)msg.WParam));
+                    var key = (Keys)(int)msg.WParam;
 
                     var e = new PreviewKeyDownEventArgs(key | ModifierKeys);
 
@@ -57,6 +57,8 @@
                                 }
                                 else
                                 {
+                                    return true;
+
                                     // Forward or backward?
                                     var forward = !isShift;
 
@@ -72,10 +74,7 @@
                                             c = form.GetNextControl(c, forward);
                                         }
 
-                                        if (c != null)
-                                        {
-                                            c.Focus();
-                                        }
+                                        c?.Focus();
                                     }
                                     return false;
                                 }
@@ -101,10 +100,7 @@
         private void closeDialogWithOK()
         {
             var h = WantCloseDialogWithOK;
-            if (h != null)
-            {
-                h(this, EventArgs.Empty);
-            }
+            h?.Invoke(this, EventArgs.Empty);
         }
 
         private static bool handleEnterKey()

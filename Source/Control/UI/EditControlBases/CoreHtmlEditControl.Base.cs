@@ -5,27 +5,10 @@
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.ComTypes;
     using System.Windows.Forms;
-    using Code.Configuration;
     using Code.PInvoke;
+    using EditControlAbsoluteBases;
     using mshtml;
     using IDataObject = System.Runtime.InteropServices.ComTypes.IDataObject;
-
-    public partial class CoreHtmlEditControl
-    {
-        private HtmlEditControlConfiguration _configuration = new HtmlEditControlConfiguration();
-
-        public HtmlEditControlConfiguration Configuration
-        {
-            get { return _configuration; }
-        }
-
-        public virtual void Configure(HtmlEditControlConfiguration configuration)
-        {
-            if (configuration == null) throw new ArgumentNullException(@"configuration");
-
-            _configuration = configuration;
-        }
-    }
 
     public partial class CoreHtmlEditControl :
         ExtendedWebBrowser,
@@ -36,11 +19,56 @@
         public const int ENointerface = unchecked((int)0x80004002);
         public const int ENotimpl = unchecked((int)0x80004001);
         public const int Sok = 0;
-        private readonly static Guid IidIhtmlEditHost = new Guid(@"3050f6a0-98b5-11cf-bb82-00aa00bdce0b");
-        private readonly static Guid SidShtmlEditHost = new Guid(@"3050f6a0-98b5-11cf-bb82-00aa00bdce0b");
+        private static readonly Guid IidIhtmlEditHost = new Guid(@"3050f6a0-98b5-11cf-bb82-00aa00bdce0b");
+        private static readonly Guid SidShtmlEditHost = new Guid(@"3050f6a0-98b5-11cf-bb82-00aa00bdce0b");
         private readonly HtmlEditHost _editHost = new HtmlEditHost();
 
         private bool _customDocUIHandlerSet;
+        private bool _clientSiteSet;
+
+        private void checkConnect()
+        {
+            // 2005-09-02: Can be null if showing a full-window PDF-viewer.
+            if (!_customDocUIHandlerSet /*EverInitialized &&*/)
+            {
+                var doc = Document?.DomDocument;
+                if (doc != null)
+                {
+                    _customDocUIHandlerSet = true;
+
+                    var cd = (UnsafeNativeMethods.ICustomDoc) doc;
+
+                    // Set the IDocHostUIHandler.
+                    cd.SetUIHandler(this);
+                }
+            }
+
+            // --
+
+            // 2005-09-02: Can be null if showing a full-window PDF-viewer.
+            if (!_clientSiteSet /*EverInitialized &&*/ )
+            {
+                var axInstance = ActiveXInstance;
+                if (axInstance != null)
+                {
+                    _clientSiteSet = true;
+
+                    var oe = (UnsafeNativeMethods.IOleObject) axInstance;
+
+                    // 2013-05-19, Uwe Keim:
+                    // Hier wird konfiguriert, dass diese Klasse IServiceProvider-Anfragen
+                    // erhalten kann.
+                    oe.SetClientSite(this);
+                }
+            }
+        }
+
+        protected override void OnDidEverInitialize(EventArgs args)
+        {
+            base.OnDidEverInitialize(args);
+
+            //checkConnect();
+        }
 
         public CoreHtmlEditControl()
         {
@@ -50,30 +78,15 @@
 
         protected override void OnHandleDestroyed(EventArgs e)
         {
-            if (_htmlConversionHelper != null)
-            {
-                _htmlConversionHelper.Dispose();
-            }
+            _htmlConversionHelper?.Dispose();
 
             base.OnHandleDestroyed(e);
         }
 
         public bool IsDocumentLoaded { get; private set; }
 
-        public IHTMLDocument2 DomDocument
-        {
-            get
-            {
-                if (Document == null || Document.DomDocument == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    return Document.DomDocument as IHTMLDocument2;
-                }
-            }
-        }
+        // Siehe andere "Bugfix 2015-11-02"-Kommentare.
+        public IHTMLDocument2 DomDocument => EverInitialized ? Document?.DomDocument as IHTMLDocument2 : null;
 
         public int ShowContextMenu(
             int dwID,
@@ -129,11 +142,6 @@
             }
         }
 
-        /// <summary>
-        /// Gets the host info.
-        /// </summary>
-        /// <param name="info">The info.</param>
-        /// <returns></returns>
         public int GetHostInfo(
             NativeMethods.DOCHOSTUIINFO info)
         {
@@ -169,7 +177,7 @@
 
         public virtual int UpdateUI()
         {
-            if (IsDocumentLoaded)
+            if (IsDocumentLoaded && EverInitialized)
             {
                 OnUpdateUI();
             }
@@ -313,7 +321,7 @@
 
         public object OleCommandTargetExecute(int cmdId, params object[] arguments)
         {
-            if (Document != null)
+            if (EverInitialized && Document != null)
             {
                 var cmdt = (NativeMethods.IOleCommandTarget)Document.DomDocument;
                 var cgidMshtml = new Guid(@"DE4BA900-59CA-11CF-9592-444553540000");
@@ -335,39 +343,14 @@
 
             IsDocumentLoaded = true;
 
-            // 2005-09-02: Can be null if showing a full-window PDF-viewer.
-            if (DomDocument != null)
-            {
-                if (!_customDocUIHandlerSet)
-                {
-                    // Do this here, too.
-                    // Enables this control to be called from the contained
-                    // JavaScript on the loaded HTML document.
-                    // See GetValueFromScript() and SetValueFromScript().
-                    //ObjectForScripting = this;
+            //checkConnect();
+        }
 
-                    _customDocUIHandlerSet = true;
+        protected override void OnDocumentCompleted(WebBrowserDocumentCompletedEventArgs e)
+        {
+            base.OnDocumentCompleted(e);
 
-                    var doc = DomDocument;
-                    var cd = (UnsafeNativeMethods.ICustomDoc) doc;
-
-                    // Set the IDocHostUIHandler.
-                    cd.SetUIHandler(this);
-                }
-
-                // --
-
-                var axInstance = ActiveXInstance;
-                if (axInstance != null)
-                {
-                    var oe = (UnsafeNativeMethods.IOleObject) axInstance;
-
-                    // 2013-05-19, Uwe Keim:
-                    // Hier wird konfiguriert, dass diese Klasse IServiceProvider-Anfragen
-                    // erhalten kann.
-                    oe.SetClientSite(this);
-                }
-            }
+            checkConnect();
         }
 
         protected virtual void OnUpdateUI()

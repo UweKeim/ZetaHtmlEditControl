@@ -10,6 +10,7 @@
     using System.Net.NetworkInformation;
     using System.Net.Sockets;
     using System.Text;
+    using Configuration;
     using global::HttpServer;
     using global::HttpServer.HttpModules;
     using global::HttpServer.Sessions;
@@ -28,17 +29,7 @@
         private int _port;
         private HttpServer _server;
 
-        private string baseUrl
-        {
-            get
-            {
-                return
-                    string.Format(
-                    @"http://{0}:{1}/texts/",
-                    localHost,
-                    _port);
-            }
-        }
+        private string baseUrl => $@"http://{localHost}:{_port}/texts/";
 
         //private string localHost
         //{
@@ -228,6 +219,10 @@
 
             response.AddHeader(@"Cache-Control", @"no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
             response.AddHeader(@"Pragma", @"no-cache");
+
+            // Das hier auch noch setzen.
+            // http://stackoverflow.com/a/9338959/107625
+            response.AddHeader(@"X-UA-Compatible", $@"IE={InternalEditingConfiguration.IEVersion}");
         }
 
         private static string removeUriStart(string uriStart, string uri)
